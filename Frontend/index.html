@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masjid Raya Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* --- Global Scroll Animations --- */
+      
+      /* Base state: Hidden and shifted down */
+      .reveal-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: opacity, transform;
+      }
+
+      /* Reveal state: Visible and natural position */
+      .reveal-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Base state: Scale up (Zoom In effect) */
+      .reveal-scale {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .reveal-scale.is-visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Staggered Delays for Children (Up to 10 items) */
+      /* This allows items to pop in one by one */
+      .stagger-1 { transition-delay: 100ms; }
+      .stagger-2 { transition-delay: 200ms; }
+      .stagger-3 { transition-delay: 300ms; }
+      .stagger-4 { transition-delay: 400ms; }
+      .stagger-5 { transition-delay: 500ms; }
+      
+      /* Smooth Image Hover Zoom */
+      .hover-zoom-img {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .group:hover .hover-zoom-img {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

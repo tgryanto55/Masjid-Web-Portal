@@ -1,0 +1,21 @@
+import { Sequelize } from 'sequelize-typescript';
+import dotenv from 'dotenv';
+// Import model yang baru dibuat
+import { PrayerTime } from '../models/PrayerTime';
+import { Event } from '../models/Event';
+import { User } from '../models/User';
+
+dotenv.config();
+
+const connection = new Sequelize({
+  dialect: 'mysql',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  logging: false,
+  // Masukkan model ke dalam array di sini
+  models: [PrayerTime, Event, User] 
+});
+
+export default connection;
