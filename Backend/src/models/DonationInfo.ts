@@ -24,7 +24,7 @@ export class DonationInfo extends Model<DonationInfo> {
   accountName!: string;
 
   @Column({
-    // PENTING: Gunakan 'long' agar dipetakan menjadi LONGTEXT di MySQL
+
     type: DataType.TEXT('long'),
     allowNull: true,
   })

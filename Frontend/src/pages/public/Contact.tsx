@@ -13,7 +13,7 @@ const Contact = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 pb-20">
-            {/* Standard Airy Header - Refined Size */}
+
             <div className="relative bg-emerald-50 py-12 px-4 mb-10 overflow-hidden border-b border-emerald-100">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full -mr-48 -mt-48 blur-3xl opacity-50"></div>
                 <div className="absolute top-1/2 left-0 w-64 h-64 bg-emerald-200/20 rounded-full -ml-32 -mt-32 blur-2xl opacity-30"></div>
@@ -30,10 +30,10 @@ const Contact = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-                    {/* Left Column: Contact Details */}
+
                     <div className={`space-y-8 transition-all duration-1000 delay-300 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
-                        {/* Address Card */}
+
                         <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-emerald-900/10 hover:border-emerald-100 hover:-translate-y-1 transition-all duration-500 group">
                             <div className="flex items-start gap-5">
                                 <div className="bg-emerald-50 p-3.5 rounded-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
@@ -48,7 +48,7 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* Phone & Email Grid */}
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-emerald-900/10 hover:border-emerald-100 hover:-translate-y-1 transition-all duration-500 group">
                                 <div className="flex flex-col gap-4">
@@ -83,7 +83,7 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* Operational Hours */}
+
                         <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-amber-900/10 hover:border-amber-100 hover:-translate-y-1 transition-all duration-500 group">
                             <div className="flex items-start gap-5">
                                 <div className="bg-amber-50 p-3.5 rounded-2xl text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300 shadow-sm">
@@ -96,7 +96,7 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* Social Media */}
+
                         {(contactInfo.facebook || contactInfo.instagram || contactInfo.youtube) && (
                             <div className="bg-linear-to-r from-emerald-900 to-emerald-800 p-8 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
@@ -137,7 +137,7 @@ const Contact = () => {
                         )}
                     </div>
 
-                    {/* Right Column: Map */}
+
                     <div className={`h-full min-h-120 lg:min-h-[600px] transition-all duration-1000 delay-500 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <div className="bg-white p-3 rounded-[3rem] shadow-2xl shadow-gray-200/60 border border-gray-100 h-full relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gray-100 animate-pulse -z-10"></div>

@@ -23,7 +23,7 @@ export const updateAbout = async (req: any, res: any) => {
         let about = await AboutInfo.findOne();
 
         if (!about) {
-            // Create if doesn't exist
+
             about = await AboutInfo.create({
                 history,
                 vision,
@@ -31,7 +31,7 @@ export const updateAbout = async (req: any, res: any) => {
                 image: image || ''
             } as any);
         } else {
-            // Update existing
+
             about.history = history;
             about.vision = vision;
             about.mission = mission;

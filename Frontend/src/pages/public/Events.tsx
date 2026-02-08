@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useApp } from '../../context/AppContext';
-import { Calendar, Clock, ArrowRight, X, Info } from 'lucide-react';
+import { Calendar, Clock, X, Info } from 'lucide-react';
 import { getEventImageUrl } from '../../utils/imageUrl';
 import type { Event } from '../../types';
 
@@ -10,7 +10,7 @@ const Events = () => {
   const { events } = state;
 
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,15 +22,10 @@ const Events = () => {
 
   const handleOpenDetail = (event: Event) => {
     setSelectedEvent(event);
-    setIsClosing(false);
   };
 
   const handleCloseDetail = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setSelectedEvent(null);
-      setIsClosing(false);
-    }, 300);
+    setSelectedEvent(null);
   };
 
   const renderDate = (dateStr: string) => {
@@ -55,13 +50,13 @@ const Events = () => {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
 
-      {/* ===== HERO (RAPET, TANPA PADDING ATAS) ===== */}
+
       <div className="relative bg-emerald-50 py-14 px-4 mb-12 overflow-hidden border-b border-emerald-100">
-        {/* decorative blur */}
+
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full -mr-48 -mt-48 blur-3xl opacity-50"></div>
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-emerald-200/20 rounded-full -ml-32 -mt-32 blur-2xl opacity-30"></div>
 
-        {/* content */}
+
         <div
           className={`max-w-7xl mx-auto text-center relative z-10 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
@@ -79,7 +74,7 @@ const Events = () => {
       </div>
 
 
-      {/* ===== CONTENT ===== */}
+
       <div className="max-w-7xl mx-auto px-4 mt-8 mb-12">
 
         {events.length === 0 ? (

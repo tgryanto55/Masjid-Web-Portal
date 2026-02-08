@@ -16,7 +16,7 @@ interface AppContextType {
   isLoading: boolean;
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
-  // Global Notification
+
   notification: { message: string; type: 'success' | 'error' | null; isVisible: boolean };
   showNotification: (message: string, type: 'success' | 'error') => void;
   hideNotification: () => void;
@@ -54,7 +54,7 @@ const defaultState: AppState = {
   }
 };
 
-// Data Cadangan jika Server Offline
+
 const fallbackPrayerTimes: PrayerTime[] = [
   { id: 1, name: 'Subuh', time: '04:30', isActive: true },
   { id: 2, name: 'Dzuhur', time: '12:00', isActive: true },
@@ -98,7 +98,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setNotification(prev => ({ ...prev, isVisible: false }));
   };
 
-  // Auto-hide notification
+
   useEffect(() => {
     if (notification.isVisible) {
       const timer = setTimeout(() => {
@@ -108,7 +108,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   }, [notification.isVisible]);
 
-  // Fungsi internal untuk mengambil ulang data events saja
+
   const refetchEvents = async () => {
     try {
       const events = await eventService.getAll();
@@ -118,17 +118,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
-  // Fetch Data dari Backend
+
   useEffect(() => {
-    // Fungsi fetch data yang bisa dipanggil ulang
+
     const fetchData = async (isBackground = false) => {
-      if (!isBackground) setIsLoading(true); // Tampilkan loading hanya saat load pertama
+      if (!isBackground) setIsLoading(true);
 
       try {
         const [prayers, events, transactions, donationInfo, contactInfo, aboutInfo] = await Promise.all([
           prayerTimeService.getAll(),
           eventService.getAll(),
-          financeService.getAll().catch(() => []), // Handle jika finance gagal terpisah
+          financeService.getAll().catch(() => []),
           donationService.get().catch(() => defaultDonationInfo),
           contactService.get().catch(() => defaultContactInfo),
           aboutService.get().catch(() => defaultState.about)
@@ -144,7 +144,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           about: aboutInfo || defaultState.about
         }));
       } catch (error: any) {
-        // Handle error gracefully
         if (!isBackground) {
           const isNetworkError = error.message === 'Network Error' || error.code === 'ERR_NETWORK';
           if (isNetworkError) {
@@ -162,22 +161,21 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             contactInfo: defaultContactInfo
           }));
         } else {
-          // Silent fail for background polling
         }
       } finally {
         if (!isBackground) setIsLoading(false);
       }
     };
 
-    // 1. Jalankan fetch pertama kali
+
     fetchData();
 
-    // 2. Setup Polling: Jalankan fetch setiap 5 detik
+
     const intervalId = setInterval(() => {
-      fetchData(true); // true = background mode (silent update)
+      fetchData(true);
     }, 5000);
 
-    // 3. Cleanup interval saat component unmount
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -214,11 +212,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
 
       await eventService.create(dataToSend);
-      // Refresh list agar pasti sinkron dengan database
+
       await refetchEvents();
     } catch (error) {
       console.error("Failed to create event", error);
-      throw error; // Lempar error agar form tau kalau gagal
+      throw error;
     }
   };
 
@@ -238,9 +236,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
 
       await eventService.update(dataToSend);
-      // FIX: Re-fetch semua data events setelah update.
-      // Ini mencegah masalah ketidakcocokan tipe ID (string vs number) di state lokal
-      // yang menyebabkan tampilan 'reset' ke data lama.
       await refetchEvents();
     } catch (error) {
       console.error("Failed to update event", error);
@@ -251,7 +246,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const deleteEvent = async (id: string | number) => {
     try {
       await eventService.delete(id);
-      // Refresh list agar sinkron
+
       await refetchEvents();
     } catch (error) {
       console.error("Failed to delete event", error);
@@ -259,7 +254,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
-  // --- Finance Functions ---
+
   const addTransaction = async (data: Omit<Transaction, 'id'>) => {
     try {
       const newTrans = await financeService.create(data);
@@ -286,7 +281,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
-  // --- Donation Info ---
+
   const updateDonationInfo = async (info: DonationInfo) => {
     try {
       const updated = await donationService.update(info);

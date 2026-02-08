@@ -7,17 +7,17 @@ import {
     ArrowUpCircle,
     ArrowDownCircle,
     Plus,
-    Search,
-    Filter,
-    MoreVertical,
-    Trash2,
+
+
+
+
     Trash,
-    Calendar,
+
     ChevronLeft,
     ChevronRight,
-    Download,
+
     Loader2,
-    X,
+
     AlertTriangle
 } from 'lucide-react';
 
@@ -41,16 +41,16 @@ const ManageFinance = () => {
         category: CATEGORIES[0]
     });
 
-    // UX States
+
     const [isSaving, setIsSaving] = useState(false);
     const [deleteId, setDeleteId] = useState<string | number | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    // Pagination State
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
-    // Carousel State for Mobile
+
     const [activeIndex, setActiveIndex] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +74,7 @@ const ManageFinance = () => {
         }
     };
 
-    // Adjust pagination if items are deleted
+
     useEffect(() => {
         const totalPages = Math.ceil(transactions.length / itemsPerPage);
         if (currentPage > totalPages && totalPages > 0) {
@@ -82,7 +82,7 @@ const ManageFinance = () => {
         }
     }, [transactions.length, currentPage]);
 
-    // Calculate Summaries
+
     const totalIncome = transactions
         .filter(t => t.type === 'income')
         .reduce((acc, curr) => acc + Number(curr.amount), 0);
@@ -93,7 +93,7 @@ const ManageFinance = () => {
 
     const balance = totalIncome - totalExpense;
 
-    // Pagination Logic
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentTransactions = transactions.slice(indexOfFirstItem, indexOfLastItem);
@@ -113,7 +113,7 @@ const ManageFinance = () => {
 
         setIsSaving(true);
 
-        // Simulate delay
+
         await new Promise(resolve => setTimeout(resolve, 600));
 
         await addTransaction({
@@ -121,7 +121,7 @@ const ManageFinance = () => {
             amount: Number(formData.amount)
         });
 
-        // Reset simple form, keep date
+
         setFormData(prev => ({
             ...prev,
             title: '',
@@ -129,7 +129,7 @@ const ManageFinance = () => {
             category: CATEGORIES[0]
         }));
 
-        // Reset to first page to see new entry
+
         setCurrentPage(1);
         setIsSaving(false);
 
@@ -143,7 +143,7 @@ const ManageFinance = () => {
     const executeDelete = async () => {
         if (deleteId) {
             setIsDeleting(true);
-            // Simulate small delay for effect
+
             await new Promise(resolve => setTimeout(resolve, 500));
             await deleteTransaction(deleteId);
             setIsDeleting(false);

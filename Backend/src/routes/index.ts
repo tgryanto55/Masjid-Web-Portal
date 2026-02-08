@@ -11,7 +11,7 @@ import { upload } from '../middleware/multer';
 
 const router = Router();
 
-// === PUBLIC ROUTES (Bisa diakses siapa saja) ===
+
 router.get('/prayer-times', getPrayerTimes);
 router.get('/events', getEvents);
 router.get('/finance', getTransactions);
@@ -20,14 +20,14 @@ router.get('/contact-info', getContactInfo);
 router.get('/about-info', getAbout);
 router.post('/auth/login', login as any);
 
-// === PROTECTED ROUTES (Harus Login / Punya Token) ===
+
 router.put('/auth/profile', verifyToken, updateProfile);
 
 router.put('/prayer-times/:id', verifyToken, updatePrayerTime);
 
-// Event Routes
+
 router.post('/events', verifyToken, upload.single('image'), createEvent);
-router.put('/events/:id', verifyToken, upload.single('image'), updateEvent); // Update Event Route
+router.put('/events/:id', verifyToken, upload.single('image'), updateEvent);
 router.delete('/events/:id', verifyToken, deleteEvent);
 
 router.post('/finance', verifyToken, createTransaction);

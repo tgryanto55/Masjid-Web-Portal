@@ -26,7 +26,7 @@ export const AdminLayout = () => {
   const { sidebarOpen, setSidebarOpen } = useApp();
   const navigate = useNavigate();
 
-  // Profile Dropdown State
+
   const [profileOpen, setProfileOpen] = useState(false);
   const [isDropdownClosing, setIsDropdownClosing] = useState(false);
 
@@ -41,14 +41,14 @@ export const AdminLayout = () => {
     navigate('/login');
   };
 
-  // Dropdown Logic with Animation
+
   const closeDropdown = () => {
     if (isDropdownClosing) return;
     setIsDropdownClosing(true);
     setTimeout(() => {
       setProfileOpen(false);
       setIsDropdownClosing(false);
-    }, 200); // Match animation duration
+    }, 200);
   };
 
   const toggleDropdown = () => {
@@ -71,7 +71,7 @@ export const AdminLayout = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Inject Animation Styles */}
+
       <style>{`
         @keyframes adminPageEnter {
           from { 
@@ -114,7 +114,7 @@ export const AdminLayout = () => {
         }
       `}</style>
 
-      {/* Mobile Sidebar Overlay */}
+
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm transition-opacity"
@@ -122,17 +122,17 @@ export const AdminLayout = () => {
         />
       )}
 
-      {/* Sidebar - Fixed Position on Desktop */}
+
       <aside className={`
         fixed inset-y-0 left-0 z-50 w-64 bg-emerald-900 text-white shadow-xl transform transition-transform duration-300 ease-in-out border-r border-emerald-800
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
       `}>
         <div className="h-full flex flex-col">
-          {/* Sidebar Header */}
+
           <div className="p-6 border-b border-emerald-800 flex justify-between items-center bg-emerald-900">
             <div className="flex items-center gap-3">
-              {/* Logo with Gold Accent */}
+
               <div className="w-8 h-8 bg-emerald-800 rounded-full flex items-center justify-center shadow-lg ring-1 ring-emerald-700">
                 <MoonStar size={16} className="text-amber-400" fill="currentColor" />
               </div>
@@ -146,7 +146,7 @@ export const AdminLayout = () => {
             </button>
           </div>
 
-          {/* Navigation */}
+
           <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -168,7 +168,7 @@ export const AdminLayout = () => {
             })}
           </nav>
 
-          {/* Sidebar Footer */}
+
           <div className="p-4 border-t border-emerald-800 bg-emerald-900">
             <Link
               to="/"
@@ -188,9 +188,9 @@ export const AdminLayout = () => {
         </div>
       </aside>
 
-      {/* Main Content Wrapper - Pushed right by sidebar width on desktop */}
+
       <div className="md:pl-64 flex flex-col min-h-screen transition-all duration-300">
-        {/* Sticky Header - Dark Emerald & Gold */}
+
         <header className="sticky top-0 z-30 bg-emerald-900 border-b border-amber-500 shadow-md">
           <div className="flex items-center justify-between px-4 py-4 md:px-8">
             <div className="flex items-center">
@@ -205,7 +205,7 @@ export const AdminLayout = () => {
               </h2>
             </div>
 
-            {/* User Profile Dropdown */}
+
             <div className="relative">
               <button
                 onClick={toggleDropdown}
@@ -224,7 +224,7 @@ export const AdminLayout = () => {
                 />
               </button>
 
-              {/* Dropdown Menu - White for readability */}
+
               {profileOpen && (
                 <>
                   <div className="fixed inset-0 z-30" onClick={closeDropdown} />
@@ -260,17 +260,17 @@ export const AdminLayout = () => {
           </div>
         </header>
 
-        {/* Content Area - Uses native window scroll */}
+
         <main className="flex-1 p-4 md:p-8">
           <div className="max-w-7xl mx-auto">
-            {/* Animation Wrapper */}
+
             <div key={location.pathname} className="animate-admin-enter">
               <Outlet />
             </div>
           </div>
         </main>
 
-        {/* Profile Settings Modal */}
+
         <ProfileSettings
           isOpen={isProfileModalOpen}
           onClose={() => setIsProfileModalOpen(false)}

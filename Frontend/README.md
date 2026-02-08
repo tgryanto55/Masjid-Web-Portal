@@ -1,114 +1,105 @@
-# Masjid Raya Frontend
+# Masjid Raya Frontend Framework
 
-Frontend web portal untuk Masjid Raya, dibangun dengan React, Vite, dan TailwindCSS. Menyediakan interface publik dan admin untuk mengelola konten masjid.
+Dokumentasi lengkap untuk sisi Frontend aplikasi Masjid Web Portal. Aplikasi ini dibangun dengan teknologi modern untuk memastikan performa tinggi, aksesibilitas, dan kemudahan penggunaan baik untuk jamaah maupun admin.
 
-## Tech Stack
+## 🛠️ Tech Stack & Libraries
 
-- **Framework**: React 19
-- **Build Tool**: Vite
-- **Language**: TypeScript
-- **Styling**: TailwindCSS
-- **Routing**: React Router DOM
-- **HTTP Client**: Axios
-- **Icons**: Lucide React
-- **Linting**: ESLint
+- **Core**: React 19 (Versi terbaru dengan peningkatan performa rendering)
+- **Build Tool**: Vite (Lightning fast HMR & Build)
+- **Language**: TypeScript (Type safety & Developer experience)
+- **Styling**: Tailwind CSS 4 (Utility-first CSS framework)
+- **Routing**: React Router 7 (Manajemen navigasi client-side)
+- **State Management**: React Context API (`AppContext`, `AuthContext`)
+- **HTTP Client**: Axios (Komunikasi dengan Backend API)
+- **Icons**: Lucide React (Koleksi icon modern & ringan)
+- **Linting**: ESLint (Menjaga kualitas kode)
 
-## Features
-
-### Public Pages
-
-- **Home**: Halaman utama dengan informasi masjid
-- **Offline Mode**: Dukungan akses saat server offline (Data Cadangan)
-- **Real-time**: Auto-refresh data (Polling setiap 5 detik)
-- **About**: Tentang masjid
-- **Events**: Daftar kegiatan masjid
-- **Donation**: Informasi donasi dan cara berdonasi
-- **Contact**: Informasi kontak dan lokasi masjid
-
-### Admin Pages
-
-- **Dashboard**: Overview admin & Ringkasan Keuangan
-- **Login**: Autentikasi admin
-- **Manage Prayer Times**: Kelola waktu sholat (Support Bulk Edit)
-- **Manage Events**: Kelola kegiatan masjid
-- **Manage Finance**: Kelola transaksi keuangan
-- **Manage Donation**: Kelola informasi donasi
-- **Edit Contact**: Edit informasi kontak
-- **Edit About**: Edit konten tentang masjid
-- **Profile Settings**: Pengaturan profile admin
-
-## Setup
-
-1. **Install Dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-2. **Environment Variables**:
-   Buat file `.env` di root folder Frontend (opsional):
-
-   ```
-   VITE_API_BASE_URL=http://localhost:5001/api
-   ```
-
-3. **Run Development**:
-
-   ```bash
-   npm run dev
-   ```
-
-4. **Build Production**:
-
-   ```bash
-   npm run build
-   npm run preview
-   ```
-
-5. **Linting**:
-   ```bash
-   npm run lint
-   ```
-
-## Project Structure
+## 📂 Struktur Folder
 
 ```
 Frontend/
-├── public/                 # Static assets
+├── public/                 # Aset statis (favicon, manifest, robots.txt)
 ├── src/
-│   ├── components/         # Reusable components
-│   │   ├── Layouts/        # Layout components (Public/Admin)
-│   │   └── UI/             # UI components (Button, etc.)
-│   ├── context/            # React contexts (App, Auth)
-│   ├── pages/              # Page components
-│   │   ├── admin/          # Admin pages
-│   │   └── public/         # Public pages
-│   ├── services/           # API services
-│   ├── types.tsx           # TypeScript types
-│   ├── App.tsx             # Main app component
-│   ├── main.tsx            # App entry point
-│   └── index.css           # Global styles
-├── package.json
-├── vite.config.ts          # Vite configuration
-├── tsconfig.json           # TypeScript configuration
-└── tailwind.config.js      # TailwindCSS configuration
+│   ├── components/         
+│   │   ├── Layouts/        # Layout utama (PublicLayout, AdminLayout)
+│   │   └── UI/             # Komponen reusable (Button, Modal, Card, Input)
+│   ├── context/            # Global State Managers
+│   │   ├── AppContext.tsx  # Data aplikasi (Events, PrayerTimes, Finance)
+│   │   └── AuthContext.tsx # Autentikasi Admin (Login, Logout, Token)
+│   ├── pages/
+│   │   ├── admin/          # Halaman Dashboard & Manajemen (Protected)
+│   │   └── public/         # Halaman untuk Jamaah (Open Access)
+│   ├── services/           # Logika API (AuthService, EventService, dll)
+│   ├── utils/              # Fungsi bantuan (Format tanggal, Rupiah, dll)
+│   ├── types.tsx           # Definisi tipe TypeScript
+│   ├── App.tsx             # Entry point & Route definitions
+│   └── main.tsx            # Rendering root react
+├── dist/                   # Hasil Build Produksi (Static Files)
+├── package.json            # Daftar dependensi
+└── vite.config.ts          # Konfigurasi Vite
 ```
 
-## API Integration
+## 🌟 Fitur Halaman
 
-Frontend terintegrasi dengan Backend API melalui Axios. Base URL dapat dikonfigurasi via environment variable `VITE_API_BASE_URL`.
+### 🕌 Halaman Publik (Public Pages)
 
-## Authentication
+Semua halaman publik dirancang dengan gaya *Glassmorphism*, responsif penuh, dan ramah pengguna.
 
-Admin authentication menggunakan JWT token yang disimpan di localStorage. Context `AuthContext` mengelola state authentication di seluruh aplikasi.
+1. **Beranda (Home)**
+   - **Hero Section**: Sambutan visual dengan latar belakang animasi halus.
+   - **Jadwal Sholat**: Widget waktu sholat hari ini dengan *highlight* sholat berikutnya.
+   - **Countdown**: Hitung mundur otomatis menuju waktu adzan selanjutnya.
 
-## Styling
+2. **Kegiatan (Events)**
+   - **Daftar Agenda**: Menampilkan kartu kegiatan masjid yang akan datang.
+   - **Filter**: (Opsional) Filter berdasarkan kategori kegiatan.
+   - **Detail Modal**: Klik kartu untuk melihat detail lengkap + poster besar.
 
-Menggunakan TailwindCSS untuk styling. Konfigurasi tersedia di `tailwind.config.js`.
+3. **Donasi (Donation)**
+   - **Info Rekening**: Menampilkan Bank, No. Rekening, dan Atas Nama.
+   - **Copy to Clipboard**: Salin nomor rekening dengan satu klik.
+   - **QRIS**: Tampilan QR Code untuk scan donasi via E-Wallet.
+   - **Konfirmasi**: Tombol langsung ke WhatsApp admin untuk konfirmasi transfer.
 
-## Development Notes
+4. **Kontak (Contact)**
+   - **Info Kontak**: Alamat, Telepon, Email, dan Jam Operasional.
+   - **Peta Lokasi**: Embed Google Maps interaktif.
+   - **Media Sosial**: Tautan ke Facebook, Instagram, YouTube.
 
-- Hot reload aktif selama development
-- TypeScript strict mode enabled
-- ESLint untuk code quality
-- Responsive design dengan TailwindCSS
+### ⚙️ Halaman Admin (Admin Pages) (Protected)
+
+Halaman ini hanya bisa diakses setelah login. Dilengkapi dengan *Sidebar Navigation* yang responsif.
+
+1. **Dashboard**
+   - Ringkasan cepat: Saldo Kas, Jumlah Kegiatan, Waktu Sholat.
+   - Grafik/Visualisasi data keuangan sederhana.
+
+2. **Keuangan (Manage Finance)**
+   - **Pencatatan**: Input Pemasukan & Pengeluaran dengan kategori.
+   - **Tabel Riwayat**: Daftar transaksi dengan fitur *Pagination*.
+   - **Ringkasan**: Kartu total pemasukan, pengeluaran, dan saldo akhir.
+   - **Keamanan**: Modal konfirmasi sebelum menghapus data transaksi.
+
+3. **Kegiatan (Manage Events)**
+   - **CRUD**: Tambah, Edit, Hapus kegiatan.
+   - **Upload Poster**: Mendukung upload gambar (file fisik) dengan kompresi otomatis di sisi server (via backend).
+   - **Preview**: Lihat preview gambar sebelum disimpan.
+
+4. **Jadwal Sholat (Manage Prayer Times)**
+   - **Bulk Edit**: Mode edit masal untuk mengubah banyak waktu sekaligus tanpa refresh.
+   - **Custom Times**: Aktifkan/Nonaktifkan waktu opsional seperti Imsak atau Dhuha.
+
+5. **Info Masjid (Edit Profile & Contact)**
+   - **Identitas**: Ubah nama masjid, deskripsi, sejarah.
+   - **Visi Misi**: Editor teks dengan dukungan *bullet points* dan *numbering*.
+
+
+## 🔧 Pengembangan Konfigurasi
+
+### Konfigurasi API
+Saat ini, Base URL API didefinisikan secara langsung di dalam kode (`src/services/api.ts` atau `src/context/AppContext.tsx`).
+- `npm run lint` : Memeriksa kualitas kode dengan ESLint.
+
+## 🎨 Theme Configuration
+
+Konfigurasi warna dan font diatur dalam `src/index.css` (Tailwind CSS v4). Tema utama menggunakan palet **Emerald** untuk nuansa Islami yang segar dan tenang.

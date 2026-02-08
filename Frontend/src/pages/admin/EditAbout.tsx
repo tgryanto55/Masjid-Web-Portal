@@ -16,7 +16,7 @@ const EditAbout = () => {
     const isInitialized = useRef(false);
 
     useEffect(() => {
-        // Only initialize form data once, prevent overwrite from background polling
+
         if (state.about && !isInitialized.current) {
             setFormData({
                 ...state.about,
@@ -67,7 +67,7 @@ const EditAbout = () => {
 
         let marker = type === 'bullet' ? '• ' : '1. ';
 
-        // If it's a number choice, try to detect the current sequence
+
         if (type === 'number') {
             const lines = text.substring(0, start).split('\n');
             const lastLine = lines[lines.length - 1];
@@ -75,11 +75,11 @@ const EditAbout = () => {
             if (match) {
                 marker = `${parseInt(match[1]) + 1}. `;
             } else if (text.length > 0 && !text.endsWith('\n')) {
-                // if not start of line, assume we want a new line with number 1
+
                 marker = '\n1. ';
             }
         } else {
-            // for bullet, add newline if not at start/after newline
+
             if (start > 0 && text[start - 1] !== '\n') {
                 marker = '\n• ';
             }
@@ -99,7 +99,7 @@ const EditAbout = () => {
     return (
         <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6 pb-24 sm:pb-12">
 
-            {/* Header section standardized with other admin pages */}
+
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100 sm:border-0 sm:pb-0 mb-4 sm:mb-6">
                 <div className="flex items-center gap-4">
                     <div className="bg-emerald-600 text-white p-3 rounded-2xl shadow-lg shadow-emerald-200">
@@ -129,7 +129,7 @@ const EditAbout = () => {
 
             <div className="space-y-6">
 
-                {/* Sejarah Section with integrated image upload */}
+
                 <section className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="border-b border-gray-50 bg-gray-50/50 px-6 py-4 flex items-center gap-3">
                         <div className="p-2.5 bg-white border border-gray-200 text-emerald-600 rounded-lg shadow-sm">
@@ -143,7 +143,7 @@ const EditAbout = () => {
 
                     <div className="p-6">
                         <div className="flex flex-col lg:flex-row gap-8 items-start">
-                            {/* Textarea Area */}
+
                             <div className="flex-1 w-full order-2 lg:order-1">
                                 <label className="block text-sm font-bold text-gray-700 mb-2">Konten Sejarah</label>
                                 <textarea

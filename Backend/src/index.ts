@@ -22,12 +22,12 @@ dotenv.config();
 const app = express();
 const port = parseInt(process.env.PORT || '5001');
 
-// 1. KEAMANAN HTTP HEADERS (Helmet)
+
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }) as any);
 
-// 2. RATE LIMITING (Anti Brute Force/Spam)
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 1000,
@@ -39,33 +39,31 @@ app.use(limiter as any);
 
 app.use(compression() as any);
 
-// 3. CORS
-// NOTE: In production, replace '*' with specific domains (e.g., ['https://masjidraya.com'])
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*', // Allow all for dev, change for prod
+  origin: process.env.CORS_ORIGIN || '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }) as any);
 
-// PENTING: Naikkan limit payload agar bisa upload gambar Base64 (Max 50MB)
+
 app.use(express.json({ limit: '50mb' }) as any);
 app.use(express.urlencoded({ limit: '50mb', extended: true }) as any);
 
-// Serve Static Files (Untuk Gambar)
-// Serve Static Files (Untuk Gambar)
+
 import path from 'path';
-// Coba serve dari root project juga untuk memastikan
+
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads')));
 
-// Gunakan Routes API
+
 app.use('/api', router);
 
-// Fungsi untuk isi data awal (Seeding)
+
 const seedDatabase = async () => {
   try {
-    // Seed Prayer Times
+
     const countPrayer = await PrayerTime.count();
     if (countPrayer === 0) {
       console.log('🌱 Seeding Prayer Times...');
@@ -78,7 +76,7 @@ const seedDatabase = async () => {
       ]);
     }
 
-    // Seed Admin User
+
     const countUser = await User.count();
     if (countUser === 0) {
       console.log('🌱 Creating Admin User...');
@@ -93,7 +91,7 @@ const seedDatabase = async () => {
       console.log('👤 Admin created: admin@masjid.com / admin123');
     }
 
-    // Seed Transactions
+
     const countTrans = await Transaction.count();
     if (countTrans === 0) {
       console.log('🌱 Seeding Transactions...');
@@ -104,20 +102,20 @@ const seedDatabase = async () => {
       ]);
     }
 
-    // Seed Events (Data Kegiatan Awal)
+
     const countEvent = await Event.count();
     if (countEvent === 0) {
       console.log('🌱 Seeding Events...');
       await Event.create({
         title: 'Kajian Rutin Sabtu',
-        date: 'Setiap Sabtu', // Updated seed to string
+        date: 'Setiap Sabtu',
         time: '09:00',
         description: 'Kajian rutin membahas tafsir Al-Quran bersama Ustadz Abdullah. Terbuka untuk umum.',
-        image: '' // Kosongkan agar ringan
+        image: ''
       } as any);
     }
 
-    // Seed Donation Info
+
     const countDonation = await DonationInfo.count();
     if (countDonation === 0) {
       console.log('🌱 Seeding Donation Info...');
@@ -130,7 +128,7 @@ const seedDatabase = async () => {
       } as any);
     }
 
-    // Seed Contact Info
+
     const countContact = await ContactInfo.count();
     if (countContact === 0) {
       console.log('🌱 Seeding Contact Info...');
@@ -146,7 +144,7 @@ const seedDatabase = async () => {
       } as any);
     }
 
-    // Seed About Info
+
     const countAbout = await AboutInfo.count();
     if (countAbout === 0) {
       console.log('🌱 Seeding About Info...');
@@ -165,21 +163,20 @@ const seedDatabase = async () => {
 
 const startServer = async () => {
   try {
-    // Coba koneksi database
+
     try {
       await connection.authenticate();
 
-      // PENTING: Add Models ke connection agar dideteksi Sequelize
+
       connection.addModels([PrayerTime, User, Event, Transaction, DonationInfo, ContactInfo, AboutInfo]);
 
       console.log('✅ Berhasil terhubung ke database MySQL');
 
-      // --- SAFE SYNC ---
-      // Kita menggunakan sync() tanpa { alter: true } untuk menghindari error index
+
       await connection.sync();
       console.log("✅ Database synced (Safe Mode)");
 
-      // Manual Migration for isActive column in prayer_times
+
       try {
         const queryInterface = connection.getQueryInterface();
         const tableDesc = await queryInterface.describeTable('prayer_times');

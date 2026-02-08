@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
-// Import model yang baru dibuat
+
 import { PrayerTime } from '../models/PrayerTime';
 import { Event } from '../models/Event';
 import { User } from '../models/User';
@@ -15,7 +15,7 @@ const connection = new Sequelize({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   logging: false,
-  // Masukkan model ke dalam array di sini
+
   models: [PrayerTime, Event, User, AboutInfo],
   pool: {
     max: 5,

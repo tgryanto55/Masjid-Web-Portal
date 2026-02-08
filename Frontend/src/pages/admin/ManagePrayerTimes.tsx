@@ -7,12 +7,12 @@ import { Clock, X, Edit2, Save, Loader2 } from 'lucide-react';
 const ManagePrayerTimes = () => {
   const { state, updatePrayerTime, sidebarOpen, showNotification } = useApp();
 
-  // Bulk Edit State
+
   const [isBulkEditing, setIsBulkEditing] = useState(false);
   const [bulkTimes, setBulkTimes] = useState<Record<string, string>>({});
   const [isSaving, setIsSaving] = useState(false);
 
-  // Bulk Edit Actions
+
   const startBulkEdit = () => {
     const initialTimes: Record<string, any> = {};
     state.prayerTimes.forEach(pt => {
@@ -35,7 +35,7 @@ const ManagePrayerTimes = () => {
   const saveBulkChanges = async () => {
     setIsSaving(true);
     try {
-      // Update all changed times
+
       const updates = Object.entries(bulkTimes).map(([id, data]: [string, any]) =>
         updatePrayerTime(id, data.time, data.isActive)
       );
@@ -63,7 +63,7 @@ const ManagePrayerTimes = () => {
           </div>
         </div>
 
-        {/* Desktop Header Actions */}
+
         <div className="hidden sm:flex items-center gap-3">
           {isBulkEditing ? (
             <>

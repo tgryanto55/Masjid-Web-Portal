@@ -6,7 +6,7 @@ import { Button } from '../../components/UI/Button';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, error, isLoading } = useAuth(); // Ambil error dan status loading dari context
+  const { login, error, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ const Login = () => {
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-           <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">M</div>
+          <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">M</div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Admin Login
@@ -93,7 +93,7 @@ const Login = () => {
               </div>
             </div>
             <div className="mt-6 flex justify-center text-sm">
-                <Link to="/" className="text-emerald-600 hover:text-emerald-500">Return to Home Page</Link>
+              <Link to="/" className="text-emerald-600 hover:text-emerald-500">Return to Home Page</Link>
             </div>
           </div>
         </div>

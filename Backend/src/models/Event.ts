@@ -13,7 +13,7 @@ export class Event extends Model<Event> {
 
   @Index
   @Column({
-    type: DataType.STRING, // Changed to STRING to allow "Setiap Ahad", etc.
+    type: DataType.STRING,
     allowNull: false,
   })
   date!: string;

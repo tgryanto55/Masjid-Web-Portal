@@ -31,10 +31,10 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
         }, 300);
     };
 
-    // State untuk Toast Notification (Mini Pop-up)
+
     const [showToast, setShowToast] = useState(false);
 
-    // Reset form saat modal dibuka
+
     useEffect(() => {
         if (isOpen && user) {
             setFormData({
@@ -47,7 +47,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
         }
     }, [isOpen, user]);
 
-    // Auto-hide Toast setelah 4 detik
+
     useEffect(() => {
         if (showToast) {
             const timer = setTimeout(() => setShowToast(false), 4000);
@@ -74,7 +74,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
         setStatus('loading');
 
         try {
-            // Simulasi delay agar transisi lebih smooth
+
             await new Promise(resolve => setTimeout(resolve, 500));
 
             const updatedUser = await authService.updateProfile({
@@ -85,13 +85,13 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
             updateUserData(updatedUser);
             setStatus('success');
 
-            // Reset password field
+
             setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
 
-            // 1. Tutup Modal Form dengan Animasi
+
             handleClose();
 
-            // 2. Tampilkan Toast Notification
+
             setShowToast(true);
 
         } catch (error: any) {
@@ -101,12 +101,12 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
         }
     };
 
-    // Jika Modal sedang tutup DAN Toast tidak aktif, tidak perlu render apa-apa
+
     if (!isOpen && !showToast) return null;
 
     return (
         <>
-            {/* 1. PROFILE FORM MODAL (Hanya render jika isOpen = true) */}
+
             {isOpen && createPortal(
                 <div className="relative z-[100]">
                     <style>{`
@@ -125,21 +125,21 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
                         .animate-modal-slide-in { animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
                         .animate-modal-slide-out { animation: modalSlideOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
                     `}</style>
-                    {/* Backdrop */}
+
                     <div
                         className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity ${isClosing ? 'animate-modal-fade-out' : 'animate-modal-fade-in'}`}
                         aria-hidden="true"
                         onClick={handleClose}
                     />
 
-                    {/* Layout Container */}
+
                     <div className="fixed inset-0 z-10 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 
-                            {/* Modal Panel */}
+
                             <div className={`relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg ${isClosing ? 'animate-modal-slide-out' : 'animate-modal-slide-in'}`}>
 
-                                {/* Header */}
+
                                 <div className="bg-emerald-900 px-6 py-4 flex justify-between items-center border-b border-amber-500">
                                     <div className="flex items-center gap-3">
                                         <div className="p-1.5 bg-white/10 rounded-lg">
@@ -157,7 +157,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
 
                                 <div className="p-6 bg-slate-50">
                                     <form id="profileForm" onSubmit={handleSubmit} className="space-y-5">
-                                        {/* Error Message */}
+
                                         {status === 'error' && (
                                             <div className="bg-red-50 text-red-700 p-3 rounded-lg flex items-center gap-2 border border-red-100 text-sm">
                                                 <AlertCircle size={18} />
@@ -165,7 +165,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
                                             </div>
                                         )}
 
-                                        {/* Inputs */}
+
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Lengkap</label>
                                             <div className="relative">
@@ -217,7 +217,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
                                     </form>
                                 </div>
 
-                                {/* Footer */}
+
                                 <div className="bg-white px-6 py-4 flex flex-row-reverse gap-3 border-t border-gray-100">
                                     <Button
                                         form="profileForm"
@@ -245,7 +245,7 @@ const ProfileSettings: React.FC<ProfileSettingsProps> = ({ isOpen, onClose }) =>
                 document.body
             )}
 
-            {/* 2. TOAST NOTIFICATION (Mini Pop-up) */}
+
             {showToast && createPortal(
                 <div className="fixed top-5 right-5 z-10000">
                     <style>{`

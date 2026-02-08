@@ -1,0 +1,14 @@
+{
+    "name": "masjid-web-portal-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "install-all": "npm install && cd Frontend && npm install && cd ../Backend && npm install",
+        "dev": "concurrently \"npm run dev --prefix Backend\" \"npm run dev --prefix Frontend\"",
+        "build": "cd Backend && npm run build && cd ../Frontend && npm run build",
+        "start": "concurrently \"npm run start --prefix Backend\" \"npm run preview --prefix Frontend\""
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}

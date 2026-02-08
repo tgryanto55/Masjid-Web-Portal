@@ -20,7 +20,7 @@ const Home = () => {
     setIsLoaded(true);
   }, []);
 
-  // Calculate Finance Summaries
+
   const totalIncome = transactions
     .filter(t => t.type === 'income')
     .reduce((acc, curr) => acc + Number(curr.amount), 0);
@@ -57,7 +57,7 @@ const Home = () => {
     }).format(num).replace('Rp', 'Rp ');
   };
 
-  // Logic untuk jam digital dan hitung mundur
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -79,7 +79,7 @@ const Home = () => {
       let targetDate = new Date();
       let foundNext = false;
 
-      // Urutkan jadwal sholat berdasarkan waktu
+
       const filteredPrayers = prayerTimes.filter(pt => {
         if (!pt.isActive) return false;
         if (pt.name === "Jumat") {
@@ -94,7 +94,7 @@ const Home = () => {
         return a.time.localeCompare(b.time);
       });
 
-      // Cari jadwal sholat berikutnya hari ini
+
       for (const pt of sortedPrayers) {
         const [h, m] = pt.time.split(':').map(Number);
         const ptInMinutes = h * 60 + m;
@@ -107,9 +107,9 @@ const Home = () => {
         }
       }
 
-      // Jika tidak ada jadwal tersisa hari ini, berarti targetnya Subuh besok
+
       if (!foundNext) {
-        targetPrayer = sortedPrayers[0]; // Asumsi subuh adalah index 0 setelah sort
+        targetPrayer = sortedPrayers[0];
         const [h, m] = targetPrayer.time.split(':').map(Number);
         targetDate = new Date();
         targetDate.setDate(targetDate.getDate() + 1); // Besok
@@ -140,7 +140,7 @@ const Home = () => {
     return () => clearInterval(timer);
   }, [prayerTimes]);
 
-  // Helper for parsing date string
+
   const parseDate = (dateStr: string): number => {
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return new Date(dateStr).getTime();
     if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
@@ -150,7 +150,7 @@ const Home = () => {
     return NaN;
   };
 
-  // Get next 2 upcoming events
+
   const upcomingEvents = events
     .sort((a, b) => {
       const timeA = parseDate(a.date);
@@ -162,7 +162,7 @@ const Home = () => {
     })
     .slice(0, 2);
 
-  // Helper untuk menampilkan tanggal di kotak kecil
+
   const getDateDisplay = (dateStr: string) => {
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
       const date = new Date(dateStr);
@@ -178,9 +178,9 @@ const Home = () => {
 
   return (
     <div className="space-y-6 pb-8 overflow-hidden bg-white">
-      {/* New Modern Hero Section */}
+
       <section className="relative lg:h-[calc(100vh-80px)] min-h-[600px] flex items-center py-8 lg:py-0 overflow-hidden bg-emerald-50/40">
-        {/* SVG Background Layer */}
+
         <div
           className="absolute inset-0 opacity-10 pointer-events-none"
           style={{
@@ -190,14 +190,14 @@ const Home = () => {
           }}
         ></div>
 
-        {/* Abstract Background Design Overlay */}
+
         <div className="absolute top-0 right-0 w-[60%] h-full bg-white/80 backdrop-blur-sm clip-path-hero hidden lg:block"></div>
         <div className="absolute top-20 right-20 w-128 h-128 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-100/20 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
+
             <div className="reveal-up space-y-6">
               <div className="inline-flex items-center gap-2 bg-emerald-600/10 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm tracking-wide border border-emerald-600/20">
                 <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
@@ -220,7 +220,7 @@ const Home = () => {
                 </Link>
               </div>
 
-              {/* Quick Info Bar */}
+
               <div className="pt-8 border-t border-gray-200 grid grid-cols-2 gap-8 max-w-md">
                 <div className="flex items-center gap-3">
                   <div className="bg-amber-100 text-amber-700 p-2 rounded-lg">
@@ -243,13 +243,13 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right: Master Prayer Card */}
+
             <div className="reveal-up stagger-1 lg:pl-10">
               <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-emerald-900/10 border border-emerald-50 p-6 md:p-8 relative overflow-hidden group">
-                {/* Visual Accent */}
+
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-600/5 -mr-10 -mt-10 rounded-full group-hover:scale-125 transition-transform duration-1000"></div>
 
-                {/* Master Digital Clock Section */}
+
                 <div className="text-center mb-8 relative z-10">
                   <div className="inline-block bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-3">
                     {currentTime.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
@@ -263,7 +263,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* Sub Prayer Times Grid */}
+
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 relative z-10">
                   {prayerTimes
                     .filter(pt => {
@@ -314,10 +314,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Events & Contact Section */}
+
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-          {/* Upcoming Events */}
+
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 reveal-up stagger-1 hover:shadow-xl transition-all duration-500 group flex flex-col h-full">
             <div className="flex justify-between items-center mb-6 shrink-0">
               <h3 className="text-2xl font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">Kegiatan Mendatang</h3>
@@ -362,9 +362,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Call to Action Box */}
+
           <div className="bg-emerald-900 rounded-2xl shadow-xl text-white relative overflow-hidden flex flex-col justify-between reveal-up stagger-2 transform hover:scale-[1.02] transition-transform duration-500 h-full">
-            {/* Decorative Background */}
+
             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-800 rounded-full blur-3xl opacity-50 -mr-16 -mt-16 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-500 rounded-full blur-3xl opacity-20 -ml-10 -mb-10 pointer-events-none"></div>
 
@@ -402,7 +402,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Finance Transparency Section */}
+
       <section className="bg-slate-100/50 py-12 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 reveal-up">
@@ -414,7 +414,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 lg:px-10 items-stretch">
-            {/* Left: Vertical Summary Card */}
+
             <div className={`lg:col-span-1 flex flex-col justify-between gap-4 transition-all duration-1000 transform h-full ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="bg-white rounded-[2rem] p-6 shadow-xl shadow-emerald-900/5 border border-emerald-100 group transition-all duration-500 hover:shadow-emerald-900/15 hover:scale-[1.02] cursor-default flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-4 mb-4">
@@ -454,7 +454,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right: History Table */}
+
             <div className={`lg:col-span-2 transition-all duration-1000 delay-300 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden flex flex-col h-full hover:shadow-gray-300/50 transition-all duration-500">
                 <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">

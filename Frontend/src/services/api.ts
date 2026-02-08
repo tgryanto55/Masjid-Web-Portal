@@ -1,11 +1,11 @@
 
 import axios from 'axios';
-import type { Transaction, DonationInfo, ContactInfo, AboutContent } from '../types';
+import type { Transaction, DonationInfo, ContactInfo } from '../types';
 
-// 1. Tentukan Alamat Backend
+
 const API_BASE_URL = 'http://127.0.0.1:5001/api';
 
-// 2. Buat Instance Axios
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -14,7 +14,7 @@ const api = axios.create({
   timeout: 60000,
 });
 
-// 3. Setup Otomatis Token
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -26,7 +26,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// === API SERVICES ===
+
 
 export const authService = {
   login: async (email: string, password: string) => {
@@ -64,7 +64,7 @@ export const eventService = {
     return response.data;
   },
   update: async (eventData: FormData) => {
-    // Extract ID from FormData or pass it separately
+
     const id = eventData.get('id');
     const response = await api.put(`/events/${id}`, eventData, {
       headers: {

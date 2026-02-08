@@ -5,7 +5,7 @@ export const getPrayerTimes = async (req: Request, res: Response) => {
   try {
     let prayerTimes = await PrayerTime.findAll();
 
-    // Inisialisasi data default jika belum lengkap
+
     const requiredNames = ['Subuh', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya', 'Jumat', 'Imsak', 'Sahur', 'Berbuka'];
     const existingNames = prayerTimes.map(pt => pt.name);
 
@@ -15,7 +15,7 @@ export const getPrayerTimes = async (req: Request, res: Response) => {
         await PrayerTime.create({
           name,
           time: '00:00',
-          isActive: !['Jumat', 'Imsak', 'Sahur', 'Berbuka'].includes(name) // Nonaktifkan default untuk tambahan
+          isActive: !['Jumat', 'Imsak', 'Sahur', 'Berbuka'].includes(name)
         });
         needsRefresh = true;
       }

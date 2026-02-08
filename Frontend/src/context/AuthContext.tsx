@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setError(null);
     try {
       const data = await authService.login(email, pass);
-      
-      // Simpan token ke localStorage (PENTING untuk request selanjutnya)
+
+
       localStorage.setItem('token', data.token);
-      
+
       setUser(data.user);
       return true;
     } catch (err: any) {

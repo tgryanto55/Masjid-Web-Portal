@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { state } = useApp();
   const { user } = useAuth();
 
-  // Calculate Balance
+
   const totalIncome = state.transactions
     .filter(t => t.type === 'income')
     .reduce((acc, curr) => acc + Number(curr.amount), 0);
@@ -95,7 +95,7 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Upcoming Events Card */}
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold text-gray-900">Agenda Mendatang</h3>
@@ -126,7 +126,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Prayer Times Card */}
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold text-gray-900">Jadwal Sholat</h3>

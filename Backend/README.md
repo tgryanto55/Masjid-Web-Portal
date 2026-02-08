@@ -1,104 +1,137 @@
-# Masjid Raya Backend
+# Masjid Raya Backend API
 
-Backend API untuk portal web Masjid Raya, dibangun dengan Node.js, Express, dan TypeScript. Menggunakan Sequelize sebagai ORM untuk database MySQL.
+Server-side application yang menangani logika bisnis, komunikasi database (MySQL), autentikasi, dan penyimpanan file untuk Masjid Web Portal. Dibangun menggunakan **Node.js, Express, dan TypeScript**.
 
-## Tech Stack
+## 🛠️ Tech Stack & Features
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Language**: TypeScript
-- **Database**: MySQL dengan Sequelize ORM
-- **Authentication**: JWT (JSON Web Token)
-- **Security**: bcryptjs untuk hashing password, Helmet untuk HTTP headers, express-rate-limit untuk rate limiting
-- **Performance**: compression (Gzip)
-- **Other**: CORS, dotenv, multer (file upload)
+- **Database**: MySQL dengan **Sequelize ORM** (Model-based)
+- **Authentication**: JWT (JSON Web Token) dengan middleware proteksi route.
+- **File Upload**: 
+  - **Multer**: Menangani upload file fisik (seperti poster kegiatan) ke folder `src/uploads`.
+  - **Base64**: Mendukung penyimpanan gambar kecil (QRIS, Profil) langsung sebagai string base64 di database.
+- **Security**: 
+  - **Helmet**: Mengamankan HTTP headers.
+  - **Rate Limiting**: Mencegah brute-force / DDoS (1000 req/15 min).
+  - **Bcrypt**: Hashing password admin.
+  - **CORS**: Mengizinkan akses dari domain Frontend tertentu.
+- **Performance**: Compression (Gzip) untuk respons API yang lebih cepat.
 
-## Features
+## 📂 Struktur Folder
 
-- **Authentication**: Login admin dengan JWT
-- **Prayer Times**: Kelola waktu sholat (Support Bulk Update)
-- **Events**: Kelola kegiatan masjid
-- **Finance**: Kelola transaksi keuangan (income/expense)
-- **Donation**: Informasi donasi (bank, QRIS)
-- **Contact**: Informasi kontak masjid
-- **About**: Informasi profil masjid (Sejarah, Visi, Misi)
-- **Auto Seeding**: Data awal (User, Jadwal, Transaksi, dll) otomatis dibuat saat startup
-- **Safe Sync**: Sinkronisasi database tanpa menghapus data yang ada
+```
+Backend/
+├── dist/                   # Hasil Compile TypeScript (Production Build)
+├── src/
+│   ├── config/             # Konfigurasi Database (Sequelize)
+│   ├── controllers/        # Logika Bisnis (Controller Layer)
+│   │   ├── AuthController.ts       # Login, Update Profile
+│   │   ├── EventController.ts      # CRUD Kegiatan + Upload Image
+│   │   ├── FinanceController.ts    # Transaksi Keuangan
+│   │   ├── PrayerTimeController.ts # Jadwal Sholat (Bulk Update)
+│   │   └── ...
+│   ├── models/             # Definisi Tabel (Model Layer)
+│   │   ├── User.ts
+│   │   ├── Event.ts
+│   │   ├── Transaction.ts
+│   │   └── ...
+│   ├── routes/             # Definisi Endpoint API
+│   ├── middleware/         # Middleware (Auth, Upload, Error Handling)
+│   ├── uploads/            # Folder Statis untuk Gambar Kegiatan
+│   ├── index.ts            # Entry Point Aplikasi
+│   └── seed.ts             # Data Awal (Seeding)
+│   
+├── .env                    # Variabel Lingkungan
+├── package.json            # Daftar Dependensi
+└── tsconfig.json           # Konfigurasi TypeScript
+```
 
-## Setup
+## 📡 API Endpoints
 
-1. **Install Dependencies**:
+Semua endpoint diawali dengan `/api`.
 
-   ```bash
-   npm install
-   ```
+### 🔓 Public Routes (Tanpa Token)
 
-2. **Environment Variables**:
-   Buat file `.env` di root folder Backend:
+- `GET /prayer-times` : Mengambil daftar waktu sholat.
+- `GET /events` : Mengambil daftar kegiatan masjid (termasuk link gambar).
+- `GET /finance` : Mengambil data transaksi keuangan.
+- `GET /donation-info` : Mengambil info rekening & donasi.
+- `GET /contact-info` : Mengambil profil & kontak masjid.
+- `GET /about-info` : Mengambil sejarah, visi, dan misi.
+- `POST /auth/login` : Login admin (Return: JWT Token).
 
-   ```
-   PORT=5001
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=your_password
-   DB_NAME=masjid_raya
-   JWT_SECRET=your_jwt_secret
-   CORS_ORIGIN=* # Atau http://localhost:5173 untuk production
-   ```
+### 🔒 Protected Routes (Butuh Header `Authorization: Bearer <token>`)
 
-3. **Database**:
-   - Pastikan MySQL server berjalan
-   - Buat database `masjid_raya`
-   - Server akan otomatis sync schema dan seed data saat startup
+#### Manajemen Waktu Sholat
+- `PUT /prayer-times/:id` : Update satu waktu sholat (Jam & Status Aktif/Nonaktif).
 
-4. **Run Development**:
+#### Manajemen Kegiatan (Multipart Form-Data)
+- `POST /events` : Tambah kegiatan baru (+ Upload Gambar).
+- `PUT /events/:id` : Update kegiatan (+ Ganti Gambar opsional).
+- `DELETE /events/:id` : Hapus kegiatan.
 
-   ```bash
-   npm run dev
-   ```
+#### Manajemen Keuangan
+- `POST /finance` : Tambah transaksi baru (Pemasukan/Pengeluaran).
+- `DELETE /finance/:id` : Hapus transaksi.
 
-5. **Build Production**:
-   ```bash
-   npm run build
-   npm start
-   ```
+#### Manajemen Info Masjid
+- `PUT /donation-info` : Update info rekening, bank, & QRIS.
+- `PUT /contact-info` : Update alamat, telepon & medsos.
+- `PUT /about-info` : Update sejarah, visi, misi & foto profil.
+- `PUT /auth/profile` : Update email/password admin.
 
-## API Endpoints
+## 💾 Database Schema (Sequelize Models)
 
-### Public Routes
+Sistem menggunakan **Auto-Migration** (`{ alter: true }` atau `{ force: false }`). Tabel akan otomatis dibuat/diupdate saat server dijalankan.
 
-- `GET /api/prayer-times` - Ambil waktu sholat
-- `GET /api/events` - Ambil daftar kegiatan
-- `GET /api/finance` - Ambil transaksi keuangan
-- `GET /api/donation-info` - Ambil info donasi
-- `GET /api/contact-info` - Ambil info kontak
-- `GET /api/about` - Ambil info tentang masjid
-- `POST /api/auth/login` - Login admin
+### Tabel Utama:
+1. **Users**: `id, name, email, password`
+2. **PrayerTimes**: `id, name, time, isActive`
+3. **Events**: `id, title, date, time, description, image (path)`
+4. **Transactions**: `id, title, amount, type (income/expense), category, date`
+5. **GoalInfos**: (Optional/Future) Info target pembangunan.
+6. **DonationInfos**: `bankName, accountNumber, accountName, qrisImage (base64)`
+7. **ContactInfos**: `address, phone, email, mapEmbedLink`
+8. **AboutInfos**: `history, vision, mission, image (base64)`
 
-### Protected Routes (Require JWT Token)
+## ⚙️ Setup & Konfigurasi
 
-- `PUT /api/auth/profile` - Update profile admin
-- `PUT /api/prayer-times/:id` - Update waktu sholat
-- `POST /api/events` - Buat kegiatan baru
-- `PUT /api/events/:id` - Update kegiatan
-- `DELETE /api/events/:id` - Hapus kegiatan
-- `POST /api/finance` - Buat transaksi baru
-- `DELETE /api/finance/:id` - Hapus transaksi
-- `PUT /api/donation-info` - Update info donasi
-- `PUT /api/contact-info` - Update info kontak
-- `PUT /api/about` - Update info tentang masjid
+### Environment Variables (.env)
+Buat file `.env` di root folder Backend:
 
-## Default Admin Account
+```env
+PORT=5001
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=masjid_raya
+JWT_SECRET=rahasia_super_aman_123
+CORS_ORIGIN=http://localhost:5173
+```
 
-- Email: admin@masjid.com
-- Password: admin123
+### Static Files Serving
+Folder `src/uploads` disajikan secara statis. Gambar kegiatan dapat diakses melalui URL:
+`http://localhost:5001/uploads/nama-file.jpg`
 
-## Notes
+## 🚀 Script Penting
 
-- Server berjalan di port 5001 secara default
-- Database sync dilakukan secara otomatis dengan mode safe (tanpa alter)
-- Seeding data dilakukan otomatis jika database kosong
-- Rate limiting: 1000 request per 15 menit per IP</content>
-- **File Upload**: Limit payload 50MB (Base64/Multipart)
-- **Static Files**: Gambar diakses via `/uploads`
-  <parameter name="filePath">c:\PROJECT_CODINGAN\masjid-raya\Backend\README.md
+### Menjalankan Server
+
+#### Development (Hot Reload)
+Gunakan mode ini saat mengembangkan aplikasi.
+```bash
+npm run dev
+```
+
+#### Production
+Compile TypeScript ke JavaScript terlebih dahulu, lalu jalankan.
+```bash
+npm run build
+npm start
+```
+**Catatan:** Backend tidak memiliki perintah `npm run preview`. Gunakan `npm start` untuk menjalankan hasil build.
+
+### Database Migration
+Database akan otomatis dibuat dan disinkronisasi saat server pertama kali dijalankan (Auto-Migration).

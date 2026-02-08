@@ -18,7 +18,7 @@ export const createEvent = async (req: any, res: any) => {
     let imagePath = image || null;
 
     if (req.file) {
-      // Simpan path relatif agar bisa diakses frontend
+
       imagePath = '/uploads/' + req.file.filename;
     }
 
@@ -54,9 +54,8 @@ export const updateEvent = async (req: any, res: any) => {
     event.time = time;
     event.description = description;
 
-    // Hanya update image jika ada file baru diupload atau base64 string dikirim
     if (req.file) {
-      // TODO: (Optional) Hapus file lama jika ada
+
       event.image = '/uploads/' + req.file.filename;
     } else if (image) {
       event.image = image;

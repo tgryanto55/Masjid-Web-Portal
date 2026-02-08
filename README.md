@@ -1,231 +1,162 @@
 # Masjid Raya Portal
 
-Portal web lengkap untuk Masjid Raya, terdiri dari Backend API dan Frontend web application. Sistem ini memungkinkan pengelolaan konten masjid secara digital, termasuk waktu sholat, kegiatan, keuangan, donasi, dan informasi kontak.
+Portal web modern dan komprehensif untuk Masjid Raya, dirancang untuk memudahkan manajemen operasional masjid dan memberikan informasi real-time kepada jamaah. Sistem ini menggabungkan **Frontend React 19** yang responsif dengan **Backend Node.js/Express** yang kuat.
 
-## 📋 Deskripsi Proyek
+## 🌟 Fitur Utama
 
-Masjid Raya Portal adalah aplikasi web modern yang dibangun untuk membantu pengelolaan masjid secara efisien. Sistem ini terdiri dari:
+### 🕌 Halaman Publik (Jamaah)
+Didesain dengan pendekatan *Glassmorphism* dan *Clean UI* untuk kenyamanan visual jamaah.
 
-- **Backend API**: RESTful API dengan Node.js, Express, dan MySQL untuk mengelola data masjid
-- **Frontend Web**: Interface pengguna dengan React dan TailwindCSS untuk publik dan admin
+- **Jadwal Sholat & Imsakiyah**: 
+  - Tampilan waktu sholat 5 waktu + Imsak & Sahur (opsional saat Ramadhan).
+  - *Countdown* waktu sholat berikutnya secara real-time.
+  - Tanda waktu sholat otomatis aktif sesuai jam sistem.
+- **Kegiatan Masjid**:
+  - Daftar agenda kegiatan dengan poster visual.
+  - Detail kegiatan (waktu, deskripsi, lokasi).
+- **Informasi Donasi**:
+  - Tampilan rekening bank dengan fitur *One-Click Copy*.
+  - Integrasi **QRIS** untuk kemudahan infaq digital.
+  - Link otomatis ke WhatsApp admin untuk konfirmasi donasi.
+- **Profil & Kontak**:
+  - Sejarah, Visi, dan Misi masjid.
+  - Peta lokasi terintegrasi (Google Maps Embed).
+  - Tautan langsung ke media sosial (Facebook, Instagram, YouTube).
 
-## 🏗️ Arsitektur
+### ⚙️ Admin Panel (Pengurus)
+Dashboard admin yang powerful untuk mengelola seluruh konten website.
 
-```
-masjid-raya/
-├── Backend/          # API Server (Node.js + Express + MySQL)
-│   ├── src/
-│   │   ├── controllers/    # Business logic
-│   │   ├── models/         # Database models (Sequelize)
-│   │   ├── routes/         # API routes
-│   │   ├── middleware/     # Authentication & security
-│   │   └── config/         # Database configuration
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── README.md
-├── Frontend/         # Web Application (React + Vite)
-│   ├── src/
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── context/        # React contexts
-│   │   └── services/       # API integration
-│   ├── package.json
-│   ├── vite.config.ts
-│   └── README.md
-└── README.md         # This file
-```
+- **Dashboard Ringkasan**:
+  - Statistik saldo kas masjid (Pemasukan vs Pengeluaran).
+  - Agenda kegiatan mendatang.
+  - Ringkasan jadwal sholat hari ini.
+- **Manajemen Keuangan (Finance)**:
+  - Pencatatan Pemasukan (Infaq, Hibah, dll) dan Pengeluaran (Operasional, Pembangunan).
+  - **Visualisasi Data**: Chart ringkasan keuangan.
+  - Tabel riwayat transaksi dengan fitur *Pagination*.
+  - Modal keamanan sebelum menghapus data transaksi.
+- **Manajemen Kegiatan (Events)**:
+  - CRUD (Create, Read, Update, Delete) kegiatan masjid.
+  - **Hybrid Image System**: Upload poster kegiatan (disimpan lokal via Multer dengan kompresi otomatis).
+- **Manajemen Jadwal Sholat**:
+  - **Bulk Edit**: Fitur edit masal untuk mengubah waktu sholat seminggu/sebulan sekaligus dengan cepat.
+  - Toggle aktif/nonaktif untuk waktu-waktu opsional (Imsak, Syuruq, Dhuha).
+- **Pengaturan Profil Masjid**:
+  - Edit Sejarah, Visi, dan Misi dengan editor teks sederhana (Bullet/Numbering support).
+  - Upload foto profil masjid (Base64 storage).
+- **Kelola Info Donasi & Kontak**:
+  - Update nomor rekening, nama bank, dan upload QRIS.
+  - Ubah alamat, jam operasional, dan link media sosial.
 
-## 🚀 Tech Stack
+## 🛠️ Teknologi yang Digunakan
+
+### Frontend
+- **Framework**: React 19
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS 4 (Modern utility-first CSS)
+- **Routing**: React Router 7
+- **HTTP Client**: Axios
+- **Icons**: Lucide React
+- **UI Components**: Custom reusable components (Button, Modal, Card)
 
 ### Backend
-
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Language**: TypeScript
 - **Database**: MySQL
-- **ORM**: Sequelize
-- **Authentication**: JWT
-- **Security**: bcryptjs, Helmet, express-rate-limit
-- **Performance**: Compression (Gzip)
+- **ORM**: Sequelize (dengan TypeScript support)
+- **Authentication**: JWT (JSON Web Token)
+- **File Handling**: 
+  - **Multer**: Untuk upload file fisik (Poster Kegiatan).
+  - **Base64**: Untuk gambar kecil/icon (QRIS, Foto Profil).
+- **Security**: Helmet, Rate Limiting, CORS, BCrypt.
 
-### Frontend
+## 📂 Struktur Proyek
 
-- **Framework**: React 19
-- **Build Tool**: Vite
-- **Language**: TypeScript
-- **Styling**: TailwindCSS
-- **Routing**: React Router DOM
-- **HTTP Client**: Axios
-- **Icons**: Lucide React
-
-## ✨ Features
-
-### Publik
-
-- ✅ **Modern Hero Section** dengan desain responsif
-- ✅ **Real-time Prayer Countdown**: Hitung mundur waktu sholat berikutnya
-- ✅ **Jadwal Sholat Digital**: Tampilan waktu sholat interaktif
-- ✅ **Daftar Kegiatan Masjid**: Informasi agenda mendatang
-- ✅ **Auto-refresh Data**: Sinkronisasi data otomatis (Polling 5s)
-- ✅ **Transparansi Keuangan**: Laporan saldo, pemasukan, dan pengeluaran bulan ini
-- ✅ **Informasi Donasi**: Rekening Bank & QRIS dengan fitur salin nomor
-- ✅ **Offline Mode Support**: Aplikasi tetap bisa dibuka dengan data cadangan saat server offline
-
-### Admin Panel
-
-- 🔐 Authentication dengan JWT
-- 📊 Dashboard Overview
-- 🕌 **Kelola Waktu Sholat**: Fitur **Bulk Edit** untuk mengubah banyak waktu sekaligus
-- 📅 Kelola Kegiatan Masjid
-- 💰 Kelola Transaksi Keuangan
-- 💳 Kelola Informasi Donasi
-- 📞 Edit Informasi Kontak
-- 📝 Edit Konten Tentang Masjid
-- 👤 Pengaturan Profile Admin
-
-## 🛠️ Setup & Installation
-
-### Prerequisites
-
-- Node.js (v16 atau lebih baru)
-- MySQL Server
-- npm atau yarn
-
-### 1. Clone Repository
-
-```bash
-git clone <repository-url>
-cd masjid-raya
+```
+Masjid-Web-Portal/
+├── Backend/                 # Server-side Application
+│   ├── src/
+│   │   ├── controllers/     # Logika bisnis (Finance, Event, PrayerTime, dll)
+│   │   ├── models/          # Definisi Tabel Database (Sequelize)
+│   │   ├── routes/          # API Endpoints
+│   │   ├── middleware/      # Auth & File Upload Middleware
+│   │   └── uploads/         # Folder penyimpanan gambar fisik
+│   ├── dist/                # [NEW] Hasil Build Backend (run `npm start` from here)
+│   ├── public/              # File statis
+│   └── ...
+├── Frontend/                # Client-side Application
+│   ├── dist/                # [NEW] Hasil Build Frontend (Static Assets)
+│   ├── src/
+│   │   ├── components/      # Komponen UI (Layout, Navbar, Cards)
+│   │   ├── pages/           # Halaman (Admin & Public)
+│   │   ├── context/         # Global State (Auth, App Data)
+│   │   └── services/        # API Integration logic
+│   └── ...
+└── README.md                # Dokumentasi Proyek
 ```
 
-### 2. Setup Backend
+## 🚀 Cara Menjalankan
 
+### Persyaratan Sistem
+## 🚀 Cara Menjalankan (Unified)
+Project ini sekarang mendukung eksekusi serentak dari root folder.
+
+### 1. Install Semua Dependencies
+```bash
+npm install
+npm run install-all
+```
+
+### 2. Development Mode
+Menjalankan Frontend dan Backend secara bersamaan dengan satu perintah:
+```bash
+npm run dev
+```
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:5001`
+
+### 3. Build & Preview
+Build semua project:
+```bash
+npm run build
+```
+
+Preview hasil build (Backend Start + Frontend Preview):
+```bash
+npm start
+```
+
+---
+
+## 🛠️ Setup Manual (Alternative)
+Jika ingin menjalankan secara terpisah:
+
+### Backend
 ```bash
 cd Backend
 npm install
-
-# Buat file .env
-cp .env.example .env
-# Edit .env dengan konfigurasi database Anda
-
-# Setup Database
-# Buat database MySQL: masjid_raya
-
-# Run Backend
 npm run dev
 ```
 
-### 3. Setup Frontend
-
+### Frontend
 ```bash
-cd ../Frontend
+cd Frontend
 npm install
-
-# Buat file .env (opsional)
-echo "VITE_API_BASE_URL=http://localhost:5001/api" > .env
-
-# Run Frontend
 npm run dev
 ```
 
-### 4. Akses Aplikasi
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:5001
-
-## 🔧 Environment Variables
-
-### Backend (.env)
-
-```
-PORT=5001
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=masjid_raya
-JWT_SECRET=your_jwt_secret
-CORS_ORIGIN=http://localhost:5173
-```
-
-### Frontend (.env)
-
-```
-VITE_API_BASE_URL=http://localhost:5001/api
-```
-
-## 👤 Default Admin Account
-
+## 👤 Akun Demo
 - **Email**: admin@masjid.com
 - **Password**: admin123
 
-## 📡 API Endpoints
+## ✨ Development Approach
+Proyek ini dibangun dengan pendekatan **AI-First Development**.
 
-Lihat dokumentasi lengkap di [Backend/README.md](Backend/README.md)
+**Google Antigravity** (Advanced AI) bertindak sebagai *Engine* utama yang menghasilkan mayoritas implementasi kode, sementara pengembang berfokus penuh pada **Visi Produk, Alur Pengguna (UX), dan Strategi Fitur**. Pendekatan ini meminimalkan penulisan kode manual, memungkinkan fokus total pada hasil akhir yang diinginkan.
 
-## 🎨 Development
+## 🤝 Kontribusi
+Silakan fork repository ini dan buat Pull Request untuk fitur baru. Pastikan untuk memperbarui dokumentasi jika ada perubahan signifikan pada struktur database atau API.
 
-### Backend
-
-```bash
-cd Backend
-npm run dev     # Development dengan nodemon
-npm run build   # Build untuk production
-npm start       # Run production build
-```
-
-### Frontend
-
-```bash
-cd Frontend
-npm run dev     # Development server
-npm run build   # Build untuk production
-npm run preview # Preview production build
-npm run lint    # Run ESLint
-```
-
-## 📊 Database Schema
-
-Sistem menggunakan auto-migration Sequelize. Data awal (seeding) akan dibuat otomatis saat pertama kali run.
-
-### Tabel Utama:
-
-- `users` - Data admin
-- `prayer_times` - Waktu sholat
-- `events` - Kegiatan masjid
-- `transactions` - Transaksi keuangan
-- `donation_infos` - Info donasi
-- `contact_infos` - Info kontak
-
-## 🔒 Security Features
-
-- JWT Authentication
-- Password hashing dengan bcryptjs
-- Rate limiting (1000 req/15min)
-- Helmet untuk HTTP security headers
-- CORS configuration
-- Input validation
-
-## 📱 Responsive Design
-
-Frontend dirancang responsive untuk desktop, tablet, dan mobile menggunakan TailwindCSS.
-
-## 🤝 Contributing
-
-1. Fork repository
-2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
-
-## 🤖 AI Assistance
-
-Proyek ini dikembangkan dengan bantuan Google AI Studio (Gemini) untuk membantu dalam coding, debugging, dan optimisasi kode. AI digunakan sebagai alat pendukung development, bukan sebagai pengganti kreativitas dan keputusan developer.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-Untuk pertanyaan atau dukungan, hubungi tim development atau buat issue di repository.</content>
-<parameter name="filePath">c:\PROJECT_CODINGAN\masjid-raya\README.md
+## 📄 Lisensi
+MIT License

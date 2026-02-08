@@ -6,11 +6,11 @@ export const getDonationInfo = async (req: any, res: any) => {
     let info = await DonationInfo.findOne();
     if (!info) {
       info = await DonationInfo.create({
-          bankName: 'Bank Syariah Indonesia (BSI)',
-          accountNumber: '1234 5678 90',
-          accountName: 'DKM Masjid Raya',
-          confirmationPhone: '+62 812-3456-7890',
-          qrisImage: ''
+        bankName: 'Bank Syariah Indonesia (BSI)',
+        accountNumber: '1234 5678 90',
+        accountName: 'DKM Masjid Raya',
+        confirmationPhone: '+62 812-3456-7890',
+        qrisImage: ''
       } as any);
     }
     res.json(info);
@@ -22,7 +22,7 @@ export const getDonationInfo = async (req: any, res: any) => {
 export const updateDonationInfo = async (req: any, res: any) => {
   try {
     const { bankName, accountNumber, accountName, qrisImage, confirmationPhone } = req.body;
-    
+
     let info = await DonationInfo.findOne();
 
     if (info) {
@@ -30,7 +30,7 @@ export const updateDonationInfo = async (req: any, res: any) => {
         bankName,
         accountNumber,
         accountName,
-        qrisImage: qrisImage || '', // Simpan string langsung
+        qrisImage: qrisImage || '',
         confirmationPhone
       } as any);
     } else {
@@ -38,19 +38,19 @@ export const updateDonationInfo = async (req: any, res: any) => {
         bankName,
         accountNumber,
         accountName,
-        qrisImage: qrisImage || '', // Simpan string langsung
+        qrisImage: qrisImage || '',
         confirmationPhone
       } as any);
     }
-    
+
     res.json(info);
   } catch (error: any) {
     console.error("❌ UPDATE DONATION ERROR:", error);
 
     if (error?.parent?.code === 'ER_NET_PACKET_TOO_LARGE') {
-        return res.status(413).json({ 
-            message: 'Ukuran gambar QRIS terlalu besar. Mohon kompres gambar.' 
-        });
+      return res.status(413).json({
+        message: 'Ukuran gambar QRIS terlalu besar. Mohon kompres gambar.'
+      });
     }
 
     res.status(500).json({ message: 'Error updating donation info', error });

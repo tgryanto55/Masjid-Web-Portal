@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useApp } from '../../context/AppContext';
 import { Button } from '../../components/UI/Button';
@@ -69,7 +69,7 @@ const EditContact = () => {
     return (
         <div className="max-w-7xl mx-auto pb-24 sm:pb-12">
 
-            {/* ===== HEADER ===== */}
+
             <div className="flex items-start justify-between gap-6 mb-6">
                 <div className="flex items-center gap-4">
                     <div className="bg-emerald-600 text-white p-3 rounded-2xl shadow-lg shadow-emerald-200">
@@ -85,7 +85,7 @@ const EditContact = () => {
                     </div>
                 </div>
 
-                {/* Desktop Save Button */}
+
                 <Button
                     type="submit"
                     onClick={handleSubmit}
@@ -106,15 +106,15 @@ const EditContact = () => {
                 </Button>
             </div>
 
-            {/* ===== FORM GRID ===== */}
+
             <form
                 onSubmit={handleSubmit}
                 className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
 
-                {/* ===== COLUMN 1 ===== */}
+
                 <div className="space-y-6">
-                    {/* Lokasi */}
+
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-5 border-b border-gray-50 bg-gray-50/50 flex items-center gap-3">
                             <div className="p-2 bg-white border border-gray-200 rounded-lg text-emerald-600 shadow-sm">
@@ -148,7 +148,7 @@ const EditContact = () => {
                         </div>
                     </div>
 
-                    {/* Jam Operasional */}
+
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-5 border-b border-gray-50 bg-gray-50/50 flex items-center gap-3">
                             <div className="p-2 bg-white border border-gray-200 rounded-lg text-emerald-600 shadow-sm">
@@ -175,7 +175,7 @@ const EditContact = () => {
                     </div>
                 </div>
 
-                {/* ===== COLUMN 2 ===== */}
+
                 <div className="space-y-6">
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-5 border-b border-gray-50 bg-gray-50/50 flex items-center gap-3">
@@ -209,7 +209,7 @@ const EditContact = () => {
                     </div>
                 </div>
 
-                {/* ===== COLUMN 3 ===== */}
+
                 <div className="space-y-6">
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-5 border-b border-gray-50 bg-gray-50/50 flex items-center gap-3">
@@ -222,7 +222,7 @@ const EditContact = () => {
                         </div>
 
                         <div className="p-6 space-y-4">
-                            {/* Facebook */}
+
                             <div className="relative">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Link Facebook
@@ -241,7 +241,7 @@ const EditContact = () => {
                                 />
                             </div>
 
-                            {/* Instagram */}
+
                             <div className="relative">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Link Instagram
@@ -260,7 +260,7 @@ const EditContact = () => {
                                 />
                             </div>
 
-                            {/* YouTube */}
+
                             <div className="relative">
                                 <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Link YouTube
@@ -283,7 +283,7 @@ const EditContact = () => {
                 </div>
             </form>
 
-            {/* ===== MOBILE FAB ===== */}
+
             {!sidebarOpen &&
                 createPortal(
                     <button

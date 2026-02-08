@@ -34,15 +34,14 @@ const Donation = () => {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
 
-      {/* ===== AIRY HEADER (SAMA DENGAN CONTACT) ===== */}
+
       <div className="relative bg-emerald-50 py-14 px-4 mb-12 overflow-hidden border-b border-emerald-100">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full -mr-48 -mt-48 blur-3xl opacity-50"></div>
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-emerald-200/20 rounded-full -ml-32 -mt-32 blur-2xl opacity-30"></div>
 
         <div
-          className={`max-w-7xl mx-auto text-center relative z-10 transition-all duration-1000 transform ${
-            isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+          className={`max-w-7xl mx-auto text-center relative z-10 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
         >
           <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight text-gray-900">
             Donasi Masjid
@@ -57,11 +56,10 @@ const Donation = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-          {/* ===== LEFT : REKENING ===== */}
+
           <div
-            className={`transition-all duration-1000 delay-200 transform ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+            className={`transition-all duration-1000 delay-200 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
           >
             <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-emerald-900/10 hover:border-emerald-100 hover:-translate-y-1 transition-all duration-500 group">
 
@@ -97,11 +95,10 @@ const Donation = () => {
 
                   <button
                     onClick={() => copyToClipboard(donationInfo.accountNumber)}
-                    className={`mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-black transition-all active:scale-95 ${
-                      copied
+                    className={`mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-black transition-all active:scale-95 ${copied
                         ? 'bg-green-100 text-green-700'
                         : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-900/20'
-                    }`}
+                      }`}
                   >
                     {copied ? <CheckCircle size={16} /> : <Copy size={16} />}
                     {copied ? 'Tersalin' : 'Salin'}
@@ -120,13 +117,12 @@ const Donation = () => {
             </div>
           </div>
 
-          {/* ===== RIGHT : QRIS + KONFIRMASI ===== */}
+
           <div
-            className={`space-y-6 transition-all duration-1000 delay-400 transform ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+            className={`space-y-6 transition-all duration-1000 delay-400 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
           >
-            {/* QRIS */}
+
             <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-gray-300/60 hover:-translate-y-1 transition-all duration-500 group">
               <div className="bg-gray-900 text-white text-center p-5 rounded-t-[2rem]">
                 <h3 className="font-black text-lg">Scan QRIS</h3>

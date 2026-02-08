@@ -11,28 +11,28 @@ const ManageEvents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
-  // Edit Mode State
+
   const [editingId, setEditingId] = useState<string | number | null>(null);
 
-  // UX States
+
   const [isSaving, setIsSaving] = useState(false);
   const [isCompressing] = useState(false);
 
-  // Delete Confirmation State
+
   const [deleteId, setDeleteId] = useState<string | number | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // File Input Ref
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Form State
+
   const [formData, setFormData] = useState({
     title: '',
     date: '',
     time: '',
     description: '',
-    image: null as File | null, // Store File object
-    preview: '' // Store preview URL
+    image: null as File | null,
+    preview: ''
   });
 
   const resetForm = () => {
@@ -48,9 +48,9 @@ const ManageEvents = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // Helper: Convert YYYY-MM-DD to DD-MM-YYYY for Input Field
+
   const formatDateForInput = (dateStr: string) => {
-    // Check for YYYY-MM-DD pattern
+
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
       const [year, month, day] = dateStr.split('-');
       return `${day}-${month}-${year}`;
@@ -68,11 +68,11 @@ const ManageEvents = () => {
     setEditingId(event.id);
     setFormData({
       title: event.title,
-      date: formatDateForInput(event.date), // Convert on open
+      date: formatDateForInput(event.date),
       time: event.time,
       description: event.description,
-      image: null, // Reset file input
-      preview: getEventImageUrl(event.image) || '' // Use existing URL as preview
+      image: null,
+      preview: getEventImageUrl(event.image) || ''
     });
     setIsClosing(false);
     setIsModalOpen(true);
@@ -88,13 +88,13 @@ const ManageEvents = () => {
     }, 300);
   };
 
-  // Helper untuk menampilkan tanggal di list
+
   const renderDate = (dateStr: string) => {
-    // Handle YYYY-MM-DD
+
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
       return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     }
-    // Handle DD-MM-YYYY (User input format)
+
     if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
       const [day, month, year] = dateStr.split('-').map(Number);
       const date = new Date(year, month - 1, day);
@@ -102,7 +102,7 @@ const ManageEvents = () => {
         return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
       }
     }
-    // Fallback/Text
+
     return dateStr;
   };
 
