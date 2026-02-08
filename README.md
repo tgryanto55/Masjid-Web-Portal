@@ -38,6 +38,7 @@ masjid-raya/
 ## 🚀 Tech Stack
 
 ### Backend
+
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Language**: TypeScript
@@ -45,29 +46,36 @@ masjid-raya/
 - **ORM**: Sequelize
 - **Authentication**: JWT
 - **Security**: bcryptjs, Helmet, express-rate-limit
+- **Performance**: Compression (Gzip)
 
 ### Frontend
+
 - **Framework**: React 19
 - **Build Tool**: Vite
 - **Language**: TypeScript
 - **Styling**: TailwindCSS
 - **Routing**: React Router DOM
 - **HTTP Client**: Axios
+- **Icons**: Lucide React
 
 ## ✨ Features
 
 ### Publik
-- ✅ Halaman Home dengan informasi masjid
-- ✅ Waktu Sholat
-- ✅ Daftar Kegiatan Masjid
-- ✅ Informasi Donasi (Bank & QRIS)
-- ✅ Informasi Kontak & Lokasi
-- ✅ Responsive Design
+
+- ✅ **Modern Hero Section** dengan desain responsif
+- ✅ **Real-time Prayer Countdown**: Hitung mundur waktu sholat berikutnya
+- ✅ **Jadwal Sholat Digital**: Tampilan waktu sholat interaktif
+- ✅ **Daftar Kegiatan Masjid**: Informasi agenda mendatang
+- ✅ **Auto-refresh Data**: Sinkronisasi data otomatis (Polling 5s)
+- ✅ **Transparansi Keuangan**: Laporan saldo, pemasukan, dan pengeluaran bulan ini
+- ✅ **Informasi Donasi**: Rekening Bank & QRIS dengan fitur salin nomor
+- ✅ **Offline Mode Support**: Aplikasi tetap bisa dibuka dengan data cadangan saat server offline
 
 ### Admin Panel
+
 - 🔐 Authentication dengan JWT
 - 📊 Dashboard Overview
-- 🕌 Kelola Waktu Sholat
+- 🕌 **Kelola Waktu Sholat**: Fitur **Bulk Edit** untuk mengubah banyak waktu sekaligus
 - 📅 Kelola Kegiatan Masjid
 - 💰 Kelola Transaksi Keuangan
 - 💳 Kelola Informasi Donasi
@@ -78,17 +86,20 @@ masjid-raya/
 ## 🛠️ Setup & Installation
 
 ### Prerequisites
+
 - Node.js (v16 atau lebih baru)
 - MySQL Server
 - npm atau yarn
 
 ### 1. Clone Repository
+
 ```bash
 git clone <repository-url>
 cd masjid-raya
 ```
 
 ### 2. Setup Backend
+
 ```bash
 cd Backend
 npm install
@@ -105,6 +116,7 @@ npm run dev
 ```
 
 ### 3. Setup Frontend
+
 ```bash
 cd ../Frontend
 npm install
@@ -117,12 +129,14 @@ npm run dev
 ```
 
 ### 4. Akses Aplikasi
+
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:5001
 
 ## 🔧 Environment Variables
 
 ### Backend (.env)
+
 ```
 PORT=5001
 DB_HOST=localhost
@@ -130,9 +144,11 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=masjid_raya
 JWT_SECRET=your_jwt_secret
+CORS_ORIGIN=http://localhost:5173
 ```
 
 ### Frontend (.env)
+
 ```
 VITE_API_BASE_URL=http://localhost:5001/api
 ```
@@ -149,6 +165,7 @@ Lihat dokumentasi lengkap di [Backend/README.md](Backend/README.md)
 ## 🎨 Development
 
 ### Backend
+
 ```bash
 cd Backend
 npm run dev     # Development dengan nodemon
@@ -157,6 +174,7 @@ npm start       # Run production build
 ```
 
 ### Frontend
+
 ```bash
 cd Frontend
 npm run dev     # Development server
@@ -170,6 +188,7 @@ npm run lint    # Run ESLint
 Sistem menggunakan auto-migration Sequelize. Data awal (seeding) akan dibuat otomatis saat pertama kali run.
 
 ### Tabel Utama:
+
 - `users` - Data admin
 - `prayer_times` - Waktu sholat
 - `events` - Kegiatan masjid

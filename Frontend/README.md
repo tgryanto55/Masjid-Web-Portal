@@ -16,16 +16,20 @@ Frontend web portal untuk Masjid Raya, dibangun dengan React, Vite, dan Tailwind
 ## Features
 
 ### Public Pages
+
 - **Home**: Halaman utama dengan informasi masjid
+- **Offline Mode**: Dukungan akses saat server offline (Data Cadangan)
+- **Real-time**: Auto-refresh data (Polling setiap 5 detik)
 - **About**: Tentang masjid
 - **Events**: Daftar kegiatan masjid
 - **Donation**: Informasi donasi dan cara berdonasi
 - **Contact**: Informasi kontak dan lokasi masjid
 
 ### Admin Pages
-- **Dashboard**: Overview admin
+
+- **Dashboard**: Overview admin & Ringkasan Keuangan
 - **Login**: Autentikasi admin
-- **Manage Prayer Times**: Kelola waktu sholat
+- **Manage Prayer Times**: Kelola waktu sholat (Support Bulk Edit)
 - **Manage Events**: Kelola kegiatan masjid
 - **Manage Finance**: Kelola transaksi keuangan
 - **Manage Donation**: Kelola informasi donasi
@@ -36,22 +40,26 @@ Frontend web portal untuk Masjid Raya, dibangun dengan React, Vite, dan Tailwind
 ## Setup
 
 1. **Install Dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Environment Variables**:
    Buat file `.env` di root folder Frontend (opsional):
+
    ```
    VITE_API_BASE_URL=http://localhost:5001/api
    ```
 
 3. **Run Development**:
+
    ```bash
    npm run dev
    ```
 
 4. **Build Production**:
+
    ```bash
    npm run build
    npm run preview

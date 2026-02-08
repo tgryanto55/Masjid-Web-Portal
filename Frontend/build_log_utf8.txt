@@ -1,0 +1,12 @@
+﻿
+> masjid-raya-frontend@0.0.0 build
+> tsc -b && vite build
+
+src/pages/admin/ManageFinace.tsx(10,5): error TS6133: 'Search' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(11,5): error TS6133: 'Filter' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(12,5): error TS6133: 'MoreVertical' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(13,5): error TS6133: 'Trash2' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(15,5): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(18,5): error TS6133: 'Download' is declared but its value is never read.
+src/pages/admin/ManageFinace.tsx(20,5): error TS6133: 'X' is declared but its value is never read.
+src/services/api.ts(3,55): error TS6196: 'AboutContent' is declared but never used.

@@ -17,7 +17,11 @@ export const login = async (req: any, res: any) => {
       return res.status(400).json({ message: 'Password salah.' });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'secretkey', { expiresIn: '1d' });
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET not defined');
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
     res.json({
       token,
@@ -28,7 +32,8 @@ export const login = async (req: any, res: any) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error logging in', error });
+    console.error('Login Error:', error);
+    res.status(500).json({ message: 'Error logging in' });
   }
 };
 
@@ -56,6 +61,7 @@ export const updateProfile = async (req: any, res: any) => {
       email: user.email
     });
   } catch (error) {
-    res.status(500).json({ message: 'Error updating profile', error });
+    console.error('Update Profile Error:', error);
+    res.status(500).json({ message: 'Error updating profile' });
   }
 };

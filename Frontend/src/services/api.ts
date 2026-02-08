@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import type { Transaction, DonationInfo, ContactInfo, Event } from '../types'; 
+import type { Transaction, DonationInfo, ContactInfo, AboutContent } from '../types';
 
 // 1. Tentukan Alamat Backend
 const API_BASE_URL = 'http://127.0.0.1:5001/api';
@@ -11,7 +11,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 60000, 
+  timeout: 60000,
 });
 
 // 3. Setup Otomatis Token
@@ -44,8 +44,8 @@ export const prayerTimeService = {
     const response = await api.get('/prayer-times');
     return response.data;
   },
-  update: async (id: string | number, time: string) => {
-    const response = await api.put(`/prayer-times/${id}`, { time });
+  update: async (id: string | number, time?: string, isActive?: boolean) => {
+    const response = await api.put(`/prayer-times/${id}`, { time, isActive });
     return response.data;
   }
 };
@@ -55,12 +55,22 @@ export const eventService = {
     const response = await api.get('/events');
     return response.data;
   },
-  create: async (eventData: any) => {
-    const response = await api.post('/events', eventData);
+  create: async (eventData: FormData) => {
+    const response = await api.post('/events', eventData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
     return response.data;
   },
-  update: async (eventData: Event) => {
-    const response = await api.put(`/events/${eventData.id}`, eventData);
+  update: async (eventData: FormData) => {
+    // Extract ID from FormData or pass it separately
+    const id = eventData.get('id');
+    const response = await api.put(`/events/${id}`, eventData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
     return response.data;
   },
   delete: async (id: string | number) => {
@@ -85,25 +95,36 @@ export const financeService = {
 };
 
 export const donationService = {
-    get: async () => {
-        const response = await api.get('/donation-info');
-        return response.data;
-    },
-    update: async (data: DonationInfo) => {
-        const response = await api.put('/donation-info', data);
-        return response.data;
-    }
+  get: async () => {
+    const response = await api.get('/donation-info');
+    return response.data;
+  },
+  update: async (data: DonationInfo) => {
+    const response = await api.put('/donation-info', data);
+    return response.data;
+  }
 };
 
 export const contactService = {
-    get: async () => {
-        const response = await api.get('/contact-info');
-        return response.data;
-    },
-    update: async (data: ContactInfo) => {
-        const response = await api.put('/contact-info', data);
-        return response.data;
-    }
+  get: async () => {
+    const response = await api.get('/contact-info');
+    return response.data;
+  },
+  update: async (data: ContactInfo) => {
+    const response = await api.put('/contact-info', data);
+    return response.data;
+  }
+};
+
+export const aboutService = {
+  get: async () => {
+    const response = await api.get('/about-info');
+    return response.data;
+  },
+  update: async (data: any) => {
+    const response = await api.put('/about-info', data);
+    return response.data;
+  }
 };
 
 export default api;

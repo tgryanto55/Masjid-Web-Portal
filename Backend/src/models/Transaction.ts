@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, Index } from 'sequelize-typescript';
 
 @Table({
   tableName: 'transactions',
@@ -12,17 +12,19 @@ export class Transaction extends Model {
   title!: string;
 
   @Column({
-    type: DataType.DECIMAL(15, 2), 
+    type: DataType.DECIMAL(15, 2),
     allowNull: false,
   })
   amount!: number;
 
+  @Index
   @Column({
     type: DataType.ENUM('income', 'expense'),
     allowNull: false,
   })
   type!: 'income' | 'expense';
 
+  @Index
   @Column({
     type: DataType.DATEONLY,
     allowNull: false,
@@ -30,6 +32,7 @@ export class Transaction extends Model {
   })
   date!: string;
 
+  @Index
   @Column({
     type: DataType.STRING,
     allowNull: true,

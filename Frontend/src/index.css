@@ -4,8 +4,36 @@
 
 @theme {
   --font-sans: 'Inter', sans-serif;
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-reveal-up: revealUp 0.5s cubic-bezier(0, 0, 0.2, 1);
+
+  @keyframes revealUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 body {
   font-family: var(--font-sans);
+}
+
+.clip-path-hero {
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

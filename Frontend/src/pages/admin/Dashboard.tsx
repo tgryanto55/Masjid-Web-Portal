@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const { state } = useApp();
   const { user } = useAuth();
-  
+
   // Calculate Balance
   const totalIncome = state.transactions
     .filter(t => t.type === 'income')
@@ -27,45 +27,52 @@ const Dashboard = () => {
   };
 
   const stats = [
-    { 
-      name: 'Saldo Kas Masjid', 
-      value: formatRupiah(balance), 
-      icon: Wallet, 
-      color: 'text-emerald-600', 
+    {
+      name: 'Saldo Kas Masjid',
+      value: formatRupiah(balance),
+      icon: Wallet,
+      color: 'text-emerald-600',
       bg: 'bg-emerald-100',
       link: '/admin/finance'
     },
-    { 
-      name: 'Jadwal Sholat', 
-      value: `${state.prayerTimes.length} Waktu`, 
-      icon: Clock, 
-      color: 'text-blue-600', 
+    {
+      name: 'Jadwal Sholat',
+      value: `${state.prayerTimes.length} Waktu`,
+      icon: Clock,
+      color: 'text-blue-600',
       bg: 'bg-blue-100',
       link: '/admin/prayer-times'
     },
-    { 
-      name: 'Kegiatan Aktif', 
-      value: `${state.events.length} Agenda`, 
-      icon: Calendar, 
-      color: 'text-amber-600', 
+    {
+      name: 'Kegiatan Aktif',
+      value: `${state.events.length} Agenda`,
+      icon: Calendar,
+      color: 'text-amber-600',
       bg: 'bg-amber-100',
       link: '/admin/events'
     },
-    { 
-      name: 'Rekening Donasi', 
-      value: state.donationInfo.bankName || 'Belum diatur', 
-      icon: Heart, 
-      color: 'text-rose-600', 
+    {
+      name: 'Rekening Donasi',
+      value: state.donationInfo.bankName || 'Belum diatur',
+      icon: Heart,
+      color: 'text-rose-600',
       bg: 'bg-rose-100',
       link: '/admin/donation'
     },
   ];
 
   return (
-    <div className="space-y-8 pb-12">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">Ahlan wa Sahlan, {user?.name}</h2>
-        <p className="text-gray-500 mt-1">Ringkasan aktivitas dan data Masjid Raya hari ini.</p>
+    <div className="space-y-4 sm:space-y-6 pb-24 sm:pb-12">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100 sm:border-0 sm:pb-0">
+        <div className="flex items-center gap-4">
+          <div className="bg-emerald-600 text-white p-3 rounded-2xl shadow-lg shadow-emerald-200">
+            <Calendar size={24} />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Ahlan wa Sahlan, {user?.name}</h2>
+            <p className="text-sm text-gray-500 mt-0.5">Ringkasan aktivitas dan data Masjid Raya hari ini.</p>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -103,15 +110,15 @@ const Dashboard = () => {
               state.events.slice(0, 3).map((event) => (
                 <div key={event.id} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-emerald-50 transition-colors border border-transparent hover:border-emerald-100">
                   <div className="bg-white p-2 rounded-lg border border-gray-200 text-center min-w-15 shadow-sm">
-                     <span className="block font-bold text-xl text-emerald-700">{new Date(event.date).getDate()}</span>
-                     <span className="text-xs font-bold text-gray-500 uppercase">{new Date(event.date).toLocaleString('default', { month: 'short' })}</span>
+                    <span className="block font-bold text-xl text-emerald-700">{new Date(event.date).getDate()}</span>
+                    <span className="text-xs font-bold text-gray-500 uppercase">{new Date(event.date).toLocaleString('default', { month: 'short' })}</span>
                   </div>
                   <div>
-                     <p className="font-bold text-gray-900 line-clamp-1">{event.title}</p>
-                     <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                        <Clock size={12} />
-                        <span>{event.time} WIB</span>
-                     </div>
+                    <p className="font-bold text-gray-900 line-clamp-1">{event.title}</p>
+                    <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                      <Clock size={12} />
+                      <span>{event.time} WIB</span>
+                    </div>
                   </div>
                 </div>
               ))
@@ -121,22 +128,22 @@ const Dashboard = () => {
 
         {/* Prayer Times Card */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-           <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold text-gray-900">Jadwal Sholat</h3>
             <Link to="/admin/prayer-times" className="text-sm font-medium text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
               Ubah waktu <ArrowUpRight size={16} />
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-3">
-             {state.prayerTimes.map(pt => (
-               <div key={pt.id} className="p-3 flex justify-between items-center bg-gray-50 rounded-lg border border-gray-100">
-                 <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <span className="font-medium text-gray-700">{pt.name}</span>
-                 </div>
-                 <span className="font-mono font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-md text-sm">{pt.time}</span>
-               </div>
-             ))}
+            {state.prayerTimes.map(pt => (
+              <div key={pt.id} className="p-3 flex justify-between items-center bg-gray-50 rounded-lg border border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span className="font-medium text-gray-700">{pt.name}</span>
+                </div>
+                <span className="font-mono font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-md text-sm">{pt.time}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

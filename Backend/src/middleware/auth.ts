@@ -9,7 +9,10 @@ export const verifyToken = (req: any, res: any, next: NextFunction) => {
   }
 
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET || 'secretkey') as any;
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET is not defined in environment variables');
+    }
+    const verified = jwt.verify(token, process.env.JWT_SECRET) as any;
     req.userId = verified.id;
     next();
   } catch (err) {

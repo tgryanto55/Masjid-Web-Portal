@@ -2,7 +2,7 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
   tableName: 'prayer_times',
-  timestamps: true 
+  timestamps: true
 })
 export class PrayerTime extends Model {
   @Column({
@@ -16,4 +16,11 @@ export class PrayerTime extends Model {
     allowNull: false
   })
   time!: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
+  })
+  isActive!: boolean;
 }

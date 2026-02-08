@@ -1,87 +1,120 @@
+import { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { History, Target, Compass } from 'lucide-react';
 import heroBg from '../../assets/BG-Masjid.svg';
 
 const About = () => {
-  const { state } = useApp();
-  const { about } = state;
-  const historyImage = heroBg;
+    const { state } = useApp();
+    const { about } = state;
+    const historyImage = about.image || heroBg;
+    const [isLoaded, setIsLoaded] = useState(false);
 
-  return (
-    <div className="bg-slate-50 min-h-screen pb-20">
-        {/* Header - Simpler Version matching Events */}
-        <div className="bg-emerald-800 text-white py-16 px-4 mb-12">
-            <div className="max-w-7xl mx-auto text-center">
-                <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Tentang Masjid Raya</h1>
-                <p className="text-emerald-100 text-lg max-w-2xl mx-auto">
-                    Mengenal lebih dekat sejarah perjalanan, impian, dan tujuan mulia kami dalam melayani umat.
-                </p>
-            </div>
-        </div>
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []);
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 space-y-12">
-            {/* History Section - Card Style */}
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 reveal-up">
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                     <div className="h-64 md:h-auto relative min-h-100 group overflow-hidden">
-                        <img 
-                            src={historyImage} 
-                            alt="Sejarah Masjid" 
-                            className="absolute inset-0 w-full h-full object-cover hover-zoom-img"
-                        />
-                        <div className="absolute inset-0 bg-emerald-900/30 mix-blend-multiply group-hover:bg-emerald-900/20 transition-colors duration-500" />
-                     </div>
-                     <div className="p-8 md:p-14 flex flex-col justify-center">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="p-3 bg-emerald-100 text-emerald-700 rounded-xl shadow-sm">
-                                <History size={28} />
+    return (
+        <div className="bg-white min-h-screen pb-20 overflow-hidden">
+            {/* New Integrated Hero & History Section */}
+            <section className="relative lg:h-[650px] flex items-center py-10 lg:py-0 overflow-hidden bg-emerald-50/40">
+                {/* SVG Background Layer */}
+                <div
+                    className="absolute inset-0 opacity-10 pointer-events-none"
+                    style={{
+                        backgroundImage: `url(${heroBg})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    }}
+                ></div>
+
+                {/* Abstract Background Design Overlay */}
+                <div className="absolute top-0 right-0 w-[60%] h-full bg-white/80 backdrop-blur-sm clip-path-hero hidden lg:block"></div>
+                <div className="absolute top-20 right-20 w-128 h-128 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-100/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-12 lg:mb-0">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        <div className={`transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} space-y-5 lg:pr-8`}>
+                            <div className="inline-flex items-center gap-2 bg-emerald-600/10 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm tracking-wide border border-emerald-600/20">
+                                <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                                Mengenal Lebih Dekat
                             </div>
-                            <h2 className="text-3xl font-bold text-gray-900">Sejarah Kami</h2>
+                            <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-[1.1] tracking-tight">
+                                Tentang <span className="text-emerald-700 text-nowrap">Masjid Raya</span>
+                            </h1>
+                            <div className="w-12 h-1.5 bg-emerald-600 rounded-full"></div>
+                            <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium">
+                                Mengenal perjalanan sejarah, impian, dan tujuan mulia kami dalam melayani umat dan menjaga syiar Islam.
+                            </p>
                         </div>
-                        <div className="prose prose-emerald prose-lg text-gray-600 leading-relaxed whitespace-pre-wrap">
-                            {about.history}
-                        </div>
-                     </div>
-                </div>
-            </div>
 
-            {/* Vision & Mission Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Vision Card */}
-                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-10 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal-up stagger-1">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-50 rounded-bl-full -mr-10 -mt-10 z-0 transition-transform duration-700 group-hover:scale-150" />
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="p-3 bg-emerald-100 text-emerald-700 rounded-xl shadow-sm group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
-                                <Target size={28} />
+                        {/* Right: Integrated History Card */}
+                        <div className={`transition-all duration-1000 delay-300 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-emerald-900/10 border border-emerald-50 overflow-hidden group">
+                                <div className="h-56 relative overflow-hidden">
+                                    <img
+                                        src={historyImage}
+                                        alt="Sejarah Masjid"
+                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-emerald-950/20 group-hover:bg-emerald-950/10 transition-colors" />
+                                    <div className="absolute bottom-4 left-4">
+                                        <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl flex items-center gap-2 text-emerald-700 shadow-lg">
+                                            <History size={18} className="font-bold" />
+                                            <span className="text-sm font-black uppercase tracking-widest">Sejarah Kami</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="p-8 lg:p-9">
+                                    <h2 className="text-xl font-black text-gray-900 mb-3 tracking-tight">Jejak Perjalanan</h2>
+                                    <div className="prose prose-emerald prose-sm text-gray-600 leading-relaxed font-medium whitespace-pre-wrap text-sm">
+                                        {about.history}
+                                    </div>
+                                </div>
                             </div>
-                            <h2 className="text-2xl font-bold text-gray-900">Visi</h2>
                         </div>
-                        <p className="text-gray-600 leading-relaxed whitespace-pre-wrap text-lg group-hover:text-gray-700 transition-colors">
-                            {about.vision}
-                        </p>
                     </div>
                 </div>
+            </section>
 
-                {/* Mission Card */}
-                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-10 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal-up stagger-2">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-amber-50 rounded-bl-full -mr-10 -mt-10 z-0 transition-transform duration-700 group-hover:scale-150" />
-                    <div className="relative z-10">
-                         <div className="flex items-center gap-4 mb-6">
-                            <div className="p-3 bg-amber-100 text-amber-700 rounded-xl shadow-sm group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
-                                <Compass size={28} />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 space-y-16 lg:space-y-20">
+                {/* Vision & Mission Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    {/* Vision Card */}
+                    <div className={`bg-white rounded-[2rem] shadow-xl shadow-emerald-900/5 border border-emerald-50 p-10 transition-all duration-1000 delay-500 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:shadow-emerald-900/15 hover:scale-[1.02] cursor-default relative overflow-hidden group`}>
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-50 rounded-bl-full -mr-12 -mt-12 z-0 transition-transform duration-700 group-hover:scale-125" />
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-5 mb-6">
+                                <div className="p-3 bg-emerald-100 text-emerald-700 rounded-2xl shadow-sm transition-colors duration-300">
+                                    <Target size={28} />
+                                </div>
+                                <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Visi</h2>
                             </div>
-                            <h2 className="text-2xl font-bold text-gray-900">Misi</h2>
+                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap text-base font-medium group-hover:text-gray-800 transition-colors">
+                                {about.vision}
+                            </p>
                         </div>
-                        <p className="text-gray-600 leading-relaxed whitespace-pre-wrap text-lg group-hover:text-gray-700 transition-colors">
-                            {about.mission}
-                        </p>
+                    </div>
+
+                    {/* Mission Card */}
+                    <div className={`bg-white rounded-[2rem] shadow-xl shadow-amber-900/5 border border-amber-50 p-10 transition-all duration-1000 delay-700 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:shadow-amber-900/15 hover:scale-[1.02] cursor-default relative overflow-hidden group`}>
+                        <div className="absolute top-0 right-0 w-48 h-48 bg-amber-50 rounded-bl-full -mr-12 -mt-12 z-0 transition-transform duration-700 group-hover:scale-125" />
+                        <div className="relative z-10">
+                            <div className="flex items-center gap-5 mb-6">
+                                <div className="p-3 bg-amber-100 text-amber-700 rounded-2xl shadow-sm transition-colors duration-300">
+                                    <Compass size={28} />
+                                </div>
+                                <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Misi</h2>
+                            </div>
+                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap text-base font-medium group-hover:text-gray-800 transition-colors">
+                                {about.mission}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default About;

@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, Index } from 'sequelize-typescript';
 
 @Table({
   tableName: 'events',
@@ -11,6 +11,7 @@ export class Event extends Model<Event> {
   })
   title!: string;
 
+  @Index
   @Column({
     type: DataType.STRING, // Changed to STRING to allow "Setiap Ahad", etc.
     allowNull: false,
@@ -30,7 +31,7 @@ export class Event extends Model<Event> {
   description!: string;
 
   @Column({
-    type: DataType.TEXT('long'), 
+    type: DataType.STRING,
     allowNull: true,
   })
   image?: string;

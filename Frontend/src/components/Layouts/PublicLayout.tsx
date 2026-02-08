@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram, Youtube, MoonStar } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import { GlobalToast } from '../UI/GlobalToast';
 
 export const PublicLayout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,7 +80,7 @@ export const PublicLayout = () => {
               <Link to="/" className="shrink-0 flex items-center gap-3 group">
                 {/* Logo: Gold Icon in Dark Circle */}
                 <div className="w-10 h-10 bg-emerald-800 rounded-full flex items-center justify-center shadow-lg ring-1 ring-emerald-700 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:ring-amber-400">
-                   <MoonStar size={20} className="text-amber-400 transition-all duration-500 group-hover:text-amber-300" fill="currentColor" />
+                  <MoonStar size={20} className="text-amber-400 transition-all duration-500 group-hover:text-amber-300" fill="currentColor" />
                 </div>
                 <span className="font-bold text-xl text-white tracking-tight group-hover:text-amber-50 transition-colors duration-300">Masjid Raya</span>
               </Link>
@@ -91,11 +92,10 @@ export const PublicLayout = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`${
-                    isActive(item.href)
+                  className={`${isActive(item.href)
                       ? 'text-amber-400' // Active: Gold
                       : 'text-emerald-100 hover:text-white' // Inactive: White/Light Emerald
-                  } px-1 py-2 text-sm font-medium transition-all duration-300 relative group`}
+                    } px-1 py-2 text-sm font-medium transition-all duration-300 relative group`}
                 >
                   {item.name}
                   {/* Custom Underline Animation */}
@@ -125,11 +125,10 @@ export const PublicLayout = () => {
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`${
-                    isActive(item.href)
+                  className={`${isActive(item.href)
                       ? 'bg-emerald-800 text-amber-400 border-l-4 border-amber-400'
                       : 'text-emerald-100 hover:bg-emerald-800 hover:text-white'
-                  } block px-3 py-2 rounded-r-md text-base font-medium transition-all duration-200`}
+                    } block px-3 py-2 rounded-r-md text-base font-medium transition-all duration-200`}
                 >
                   {item.name}
                 </Link>
@@ -142,7 +141,7 @@ export const PublicLayout = () => {
       <main className="grow">
         {/* Key on this div forces re-render and animation trigger on route change */}
         <div key={location.pathname} className="animate-page-enter">
-           <Outlet />
+          <Outlet />
         </div>
       </main>
 
@@ -150,7 +149,7 @@ export const PublicLayout = () => {
       <footer className="bg-emerald-900 text-white pt-16 pb-8 border-t-4 border-amber-500 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="reveal-up stagger-1">
@@ -159,7 +158,7 @@ export const PublicLayout = () => {
                 Masjid Raya
               </h3>
               <p className="text-emerald-100 text-sm leading-relaxed max-w-sm">
-                Pusat peradaban dan ibadah yang nyaman untuk seluruh umat muslim. 
+                Pusat peradaban dan ibadah yang nyaman untuk seluruh umat muslim.
                 Mari makmurkan masjid bersama keluarga tercinta.
               </p>
             </div>
@@ -174,8 +173,8 @@ export const PublicLayout = () => {
             <div className="reveal-up stagger-3">
               <h3 className="text-lg font-semibold mb-6 text-white border-b border-emerald-800 pb-2 inline-block">Terhubung Dengan Kami</h3>
               <div className="flex space-x-4 mb-6">
-                <a 
-                  href={contactInfo.facebook || '#'} 
+                <a
+                  href={contactInfo.facebook || '#'}
                   target={contactInfo.facebook ? "_blank" : "_self"}
                   rel="noopener noreferrer"
                   className={`transition-all duration-300 p-2.5 rounded-full ${contactInfo.facebook ? 'text-white bg-emerald-800 hover:bg-amber-500 hover:text-white hover:-translate-y-1 shadow-lg' : 'text-emerald-100/30 cursor-default bg-emerald-900 border border-emerald-800'}`}
@@ -184,9 +183,9 @@ export const PublicLayout = () => {
                 >
                   <Facebook size={20} />
                 </a>
-                
-                <a 
-                  href={contactInfo.instagram || '#'} 
+
+                <a
+                  href={contactInfo.instagram || '#'}
                   target={contactInfo.instagram ? "_blank" : "_self"}
                   rel="noopener noreferrer"
                   className={`transition-all duration-300 p-2.5 rounded-full ${contactInfo.instagram ? 'text-white bg-emerald-800 hover:bg-amber-500 hover:text-white hover:-translate-y-1 shadow-lg' : 'text-emerald-100/30 cursor-default bg-emerald-900 border border-emerald-800'}`}
@@ -195,9 +194,9 @@ export const PublicLayout = () => {
                 >
                   <Instagram size={20} />
                 </a>
-                
-                <a 
-                  href={contactInfo.youtube || '#'} 
+
+                <a
+                  href={contactInfo.youtube || '#'}
                   target={contactInfo.youtube ? "_blank" : "_self"}
                   rel="noopener noreferrer"
                   className={`transition-all duration-300 p-2.5 rounded-full ${contactInfo.youtube ? 'text-white bg-emerald-800 hover:bg-amber-500 hover:text-white hover:-translate-y-1 shadow-lg' : 'text-emerald-100/30 cursor-default bg-emerald-900 border border-emerald-800'}`}
@@ -213,10 +212,11 @@ export const PublicLayout = () => {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-amber-400 text-amber-400 text-sm flex items-center justify-center text-center">
-           <p>&copy; {new Date().getFullYear()} Masjid Raya. All rights reserved.</p>
-         </div>
+            <p>&copy; {new Date().getFullYear()} Masjid Raya. All rights reserved.</p>
+          </div>
         </div>
       </footer>
+      <GlobalToast />
     </div>
   );
 };

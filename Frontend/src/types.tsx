@@ -2,6 +2,7 @@ export interface PrayerTime {
   id: number | string;
   name: string;
   time: string;
+  isActive: boolean;
 }
 
 export interface Event {
@@ -17,6 +18,7 @@ export interface AboutContent {
   history: string;
   vision: string;
   mission: string;
+  image?: string;
 }
 
 export interface Transaction {
