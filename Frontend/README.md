@@ -94,11 +94,27 @@ Halaman ini hanya bisa diakses setelah login. Dilengkapi dengan *Sidebar Navigat
    - **Visi Misi**: Editor teks dengan dukungan *bullet points* dan *numbering*.
 
 
-## 🔧 Pengembangan Konfigurasi
+## 🚀 Pengembangan (Scripts)
 
-### Konfigurasi API
-Saat ini, Base URL API didefinisikan secara langsung di dalam kode (`src/services/api.ts` atau `src/context/AppContext.tsx`).
-- `npm run lint` : Memeriksa kualitas kode dengan ESLint.
+Disarankan untuk menjalankan perintah dari **Root Folder** untuk kemudahan (Fullstack). Namun, jika ingin menjalankan secara terpisah di folder Frontend:
+
+### Menjalankan Development (HMR)
+```bash
+npm run dev
+```
+
+### Build untuk Produksi
+```bash
+npm run build
+```
+
+### Linting & Kualitas Kode
+```bash
+npm run lint
+```
+
+---
+**Catatan:** Untuk instruksi instalasi lengkap secara unified, silakan lihat [Root README](../README.md).
 
 ## 🎨 Theme Configuration
 

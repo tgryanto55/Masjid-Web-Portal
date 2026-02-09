@@ -100,29 +100,36 @@ Masjid-Web-Portal/
 
 ### Persyaratan Sistem
 ## 🚀 Cara Menjalankan (Unified)
-Project ini sekarang mendukung eksekusi serentak dari root folder.
 
-### 1. Install Semua Dependencies
+Project ini menduduki struktur monorepo sederhana yang mendukung eksekusi serentak dari root folder.
+
+### 1. Persiapan Environment
+Penting untuk mengatur variabel lingkungan sebelum menjalankan aplikasi.
+- Copy file `Backend/.env.example` menjadi `Backend/.env`.
+- Sesuaikan konfigurasi database (Host, User, Password, DB Name) di dalam `Backend/.env`.
+
+### 2. Install Semua Dependencies
+Jalankan perintah ini di root folder:
 ```bash
 npm install
 npm run install-all
 ```
 
-### 2. Development Mode
-Menjalankan Frontend dan Backend secara bersamaan dengan satu perintah:
+### 3. Development Mode
+Menjalankan Frontend dan Backend secara bersamaan dengan fitur *Hot Reload*:
 ```bash
 npm run dev
 ```
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:5001`
+- **Frontend**: `http://localhost:5173`
+- **Backend API**: `http://localhost:5001`
 
-### 3. Build & Preview
-Build semua project:
+### 4. Build & Production Preview
+Build semua project untuk produksi:
 ```bash
 npm run build
 ```
 
-Preview hasil build (Backend Start + Frontend Preview):
+Jalankan semua project dari hasil build:
 ```bash
 npm start
 ```
@@ -146,17 +153,17 @@ npm install
 npm run dev
 ```
 
-## 👤 Akun Demo
-- **Email**: admin@masjid.com
-- **Password**: admin123
+## 👤 Akun Demo Default
+- **Email**: `admin@masjid.com`
+- **Password**: `admin123`
 
 ## ✨ Development Approach
-Proyek ini dibangun dengan pendekatan **AI-First Development**.
+Proyek ini dibangun dengan pendekatan **AI-First Development** menggunakan **Google Antigravity**. Dokumentasi ini diperbarui secara berkala untuk mencerminkan perkembangan fitur terbaru.
 
-**Google Antigravity** (Advanced AI) bertindak sebagai *Engine* utama yang menghasilkan mayoritas implementasi kode, sementara pengembang berfokus penuh pada **Visi Produk, Alur Pengguna (UX), dan Strategi Fitur**. Pendekatan ini meminimalkan penulisan kode manual, memungkinkan fokus total pada hasil akhir yang diinginkan.
+---
 
 ## 🤝 Kontribusi
-Silakan fork repository ini dan buat Pull Request untuk fitur baru. Pastikan untuk memperbarui dokumentasi jika ada perubahan signifikan pada struktur database atau API.
+Silakan fork repository ini dan buat Pull Request. Pastikan untuk memperbarui dokumentasi jika ada perubahan signifikan pada struktur database atau API.
 
 ## 📄 Lisensi
 MIT License

@@ -99,16 +99,17 @@ Sistem menggunakan **Auto-Migration** (`{ alter: true }` atau `{ force: false }`
 ## ⚙️ Setup & Konfigurasi
 
 ### Environment Variables (.env)
-Buat file `.env` di root folder Backend:
+Aplikasi ini membutuhkan file `.env` untuk konfigurasi koneksi database dan keamanan.
+1. Copy file `.env.example` menjadi `.env`.
+2. Buka `.env` dan sesuaikan nilainya:
 
 ```env
 PORT=5001
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=masjid_raya
-JWT_SECRET=rahasia_super_aman_123
-CORS_ORIGIN=http://localhost:5173
+DB_PASS=your_password
+DB_NAME=masjid_raya_db
+JWT_SECRET=GANTI_DENGAN_SECRET_YANG_KUAT
 ```
 
 ### Static Files Serving
@@ -117,21 +118,18 @@ Folder `src/uploads` disajikan secara statis. Gambar kegiatan dapat diakses mela
 
 ## 🚀 Script Penting
 
-### Menjalankan Server
+Disarankan untuk menjalankan perintah dari **Root Folder** untuk kemudahan. Namun, jika ingin menjalankan secara terpisah di folder Backend:
 
 #### Development (Hot Reload)
-Gunakan mode ini saat mengembangkan aplikasi.
 ```bash
 npm run dev
 ```
 
-#### Production
-Compile TypeScript ke JavaScript terlebih dahulu, lalu jalankan.
+#### Production Build & Start
 ```bash
 npm run build
 npm start
 ```
-**Catatan:** Backend tidak memiliki perintah `npm run preview`. Gunakan `npm start` untuk menjalankan hasil build.
 
-### Database Migration
-Database akan otomatis dibuat dan disinkronisasi saat server pertama kali dijalankan (Auto-Migration).
+---
+**Catatan:** Untuk instruksi instalasi lengkap secara unified, silakan lihat [Root README](../README.md).
