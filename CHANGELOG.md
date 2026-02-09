@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-02-09
+
+### Added
+- **Security**: Added `.env.example` as a configuration template to prevent accidental exposure of sensitive variables.
+- **Documentation**: Enhanced all `README.md` files with unified setup instructions and cross-references.
+
+### Changed
+- **Git Configuration**: Consolidated subdirectory `.gitignore` rules into the root folder.
+- **Backend Architecture**: Added explicit ignore for `Backend/src/uploads/` to keep repository clean of test media.
+
+### Fixed
+- **Security Audit**: Removed `.env` and `node_modules` from Git tracking in the Backend component.
+
 ## [1.0.0] - 2026-02-09
 
 ### Added
