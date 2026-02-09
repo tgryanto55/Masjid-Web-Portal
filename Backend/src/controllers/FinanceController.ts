@@ -7,7 +7,8 @@ export const getTransactions = async (req: any, res: any) => {
     });
     res.json(transactions);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching transactions', error });
+    console.error("❌ FETCH TRANSACTIONS ERROR:", error);
+    res.status(500).json({ message: 'Gagal mengambil data transaksi.' });
   }
 };
 
@@ -23,7 +24,8 @@ export const createTransaction = async (req: any, res: any) => {
     });
     res.status(201).json(transaction);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating transaction', error });
+    console.error("❌ CREATE TRANSACTION ERROR:", error);
+    res.status(500).json({ message: 'Gagal membuat transaksi.' });
   }
 };
 
@@ -31,7 +33,7 @@ export const deleteTransaction = async (req: any, res: any) => {
   try {
     const { id } = req.params;
     const transaction = await Transaction.findByPk(id);
-    
+
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
     }
@@ -39,6 +41,7 @@ export const deleteTransaction = async (req: any, res: any) => {
     await transaction.destroy();
     res.json({ message: 'Transaction deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting transaction', error });
+    console.error("❌ DELETE TRANSACTION ERROR:", error);
+    res.status(500).json({ message: 'Gagal menghapus transaksi.' });
   }
 };
