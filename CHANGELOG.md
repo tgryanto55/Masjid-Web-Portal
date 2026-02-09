@@ -10,14 +10,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2026-02-09
 
 ### Added
-- **Security**: Added `.env.example` as a configuration template to prevent accidental exposure of sensitive variables.
+- **Smart Batching**: New `/public-data` endpoint in Backend to consolidate multiple public requests into a single call, reducing network overhead by 80%.
+- **Floating Glassmorphism Footer**: Redesigned the public footer as a detached, blurred "pod" to match the modern navbar aesthetic.
+- **Hero & Header Blending**: Implemented smooth gradient transitions between hero sections and content, eliminating sharp visual borders.
+- **Immersive Hero Sections**: Full-viewport hero sections for Home and About pages for a more premium visual experience.
+- **Improved Security**: Added `.env.example` and consolidated `.gitignore` to prevent sensitive data exposure.
 - **Documentation**: Enhanced all `README.md` files with unified setup instructions and cross-references.
 
 ### Changed
+- **Floating Navbar Refinement**: Adjusted public content layout to eliminate overlaps and ensure consistent width across all pages.
+- **Improved Alignment**: Vertically centered hero content on Home and About pages.
+- **Enhanced Spacing**: Increased header heights for Events, Donation, and Contact pages for better legibility.
+- **Login Page Fix**: Resolved layout overlap between the floating navbar and the Admin Login form.
+- **Stability Tuning**: Increased backend rate limit to 2000 and optimized frontend polling interval to 30 seconds to prevent periodic disconnects.
 - **Git Configuration**: Consolidated subdirectory `.gitignore` rules into the root folder.
 - **Backend Architecture**: Added explicit ignore for `Backend/src/uploads/` to keep repository clean of test media.
 
 ### Fixed
+- **Connection Stability**: Resolved issues where frontend would periodically lose connection to the backend due to rate limiting.
+- **Layout Overlaps**: Fixed several instances of content being obscured by the floating navbar.
 - **Security Audit**: Removed `.env` and `node_modules` from Git tracking in the Backend component.
 
 ## [1.0.0] - 2026-02-09

@@ -16,7 +16,7 @@ const About = () => {
     return (
         <div className="bg-white min-h-screen pb-20 overflow-hidden">
             {/* New Integrated Hero & History Section */}
-            <section className="relative lg:h-[650px] flex items-center py-10 lg:py-0 overflow-hidden bg-emerald-50/40">
+            <section className="relative lg:h-screen min-h-[600px] flex items-center pt-36 pb-32 overflow-hidden bg-emerald-50/40">
                 {/* SVG Background Layer */}
                 <div
                     className="absolute inset-0 opacity-10 pointer-events-none"
@@ -32,7 +32,10 @@ const About = () => {
                 <div className="absolute top-20 right-20 w-128 h-128 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
                 <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-100/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-12 lg:mb-0">
+                {/* Smooth Blend Gradient at Bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white z-20 pointer-events-none"></div>
+
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-12 lg:mb-0">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div className={`transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} space-y-5 lg:pr-8`}>
                             <div className="inline-flex items-center gap-2 bg-emerald-600/10 text-emerald-700 px-4 py-2 rounded-full font-bold text-sm tracking-wide border border-emerald-600/20">
@@ -77,7 +80,7 @@ const About = () => {
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 space-y-16 lg:space-y-20">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16 space-y-16 lg:space-y-20">
                 {/* Vision & Mission Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {/* Vision Card */}

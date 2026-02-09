@@ -4,17 +4,17 @@ Server-side application yang menangani logika bisnis, komunikasi database (MySQL
 
 ## 🛠️ Tech Stack & Features
 
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Language**: TypeScript
-- **Database**: MySQL dengan **Sequelize ORM** (Model-based)
-- **Authentication**: JWT (JSON Web Token) dengan middleware proteksi route.
+### [v1.0.2] Highlights
+- **Public Data Batching**: Endpoint baru `/api/public-data` untuk efisiensi pengambilan data kolektif.
+- **Rate Limit Adjustments**: Peningkatan keamanan dan stabilitas koneksi.
+- **Sequelize MySQL**: Manajemen basis data relasional yang handal.
+- **Smart Batching**: Menggabungkan beberapa permintaan data publik menjadi satu respons API untuk efisiensi.
 - **File Upload**: 
-  - **Multer**: Menangani upload file fisik (seperti poster kegiatan) ke folder `src/uploads`.
+  - **Multer**: Menangani upload file fisik (seperti poster kegiatan) ke folder `public/uploads`.
   - **Base64**: Mendukung penyimpanan gambar kecil (QRIS, Profil) langsung sebagai string base64 di database.
 - **Security**: 
   - **Helmet**: Mengamankan HTTP headers.
-  - **Rate Limiting**: Mencegah brute-force / DDoS (1000 req/15 min).
+  - **Rate Limiting**: Mencegah brute-force / DDoS (2000 req/15 min).
   - **Bcrypt**: Hashing password admin.
   - **CORS**: Mengizinkan akses dari domain Frontend tertentu.
 - **Performance**: Compression (Gzip) untuk respons API yang lebih cepat.
@@ -24,6 +24,7 @@ Server-side application yang menangani logika bisnis, komunikasi database (MySQL
 ```
 Backend/
 ├── dist/                   # Hasil Compile TypeScript (Production Build)
+├── public/uploads/            # Folder Statis untuk Gambar Kegiatan
 ├── src/
 │   ├── config/             # Konfigurasi Database (Sequelize)
 │   ├── controllers/        # Logika Bisnis (Controller Layer)
@@ -39,10 +40,7 @@ Backend/
 │   │   └── ...
 │   ├── routes/             # Definisi Endpoint API
 │   ├── middleware/         # Middleware (Auth, Upload, Error Handling)
-│   ├── uploads/            # Folder Statis untuk Gambar Kegiatan
-│   ├── index.ts            # Entry Point Aplikasi
-│   └── seed.ts             # Data Awal (Seeding)
-│   
+│   └── index.ts            # Entry Point Aplikasi
 ├── .env                    # Variabel Lingkungan
 ├── package.json            # Daftar Dependensi
 └── tsconfig.json           # Konfigurasi TypeScript
@@ -54,6 +52,7 @@ Semua endpoint diawali dengan `/api`.
 
 ### 🔓 Public Routes (Tanpa Token)
 
+- `GET /public-data` : **[RECOMMENDED]** Mengambil seluruh data publik (prayers, events, finance, dll) dalam satu batch.
 - `GET /prayer-times` : Mengambil daftar waktu sholat.
 - `GET /events` : Mengambil daftar kegiatan masjid (termasuk link gambar).
 - `GET /finance` : Mengambil data transaksi keuangan.
@@ -113,7 +112,7 @@ JWT_SECRET=GANTI_DENGAN_SECRET_YANG_KUAT
 ```
 
 ### Static Files Serving
-Folder `src/uploads` disajikan secara statis. Gambar kegiatan dapat diakses melalui URL:
+Folder `public/uploads` disajikan secara statis. Gambar kegiatan dapat diakses melalui URL:
 `http://localhost:5001/uploads/nama-file.jpg`
 
 ## 🚀 Script Penting

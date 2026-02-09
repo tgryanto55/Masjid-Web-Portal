@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { AppState, PrayerTime, Event, AboutContent, Transaction, DonationInfo, ContactInfo } from '../types';
-import { prayerTimeService, eventService, financeService, donationService, contactService, aboutService } from '../services/api';
+import { prayerTimeService, eventService, financeService, donationService, contactService, aboutService, publicService } from '../services/api';
 
 interface AppContextType {
   state: AppState;
@@ -125,23 +125,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       if (!isBackground) setIsLoading(true);
 
       try {
-        const [prayers, events, transactions, donationInfo, contactInfo, aboutInfo] = await Promise.all([
-          prayerTimeService.getAll(),
-          eventService.getAll(),
-          financeService.getAll().catch(() => []),
-          donationService.get().catch(() => defaultDonationInfo),
-          contactService.get().catch(() => defaultContactInfo),
-          aboutService.get().catch(() => defaultState.about)
-        ]);
+        const data = await publicService.getData();
 
         setState(prev => ({
           ...prev,
-          prayerTimes: prayers,
-          events: events,
-          transactions: transactions,
-          donationInfo: donationInfo || defaultDonationInfo,
-          contactInfo: contactInfo || defaultContactInfo,
-          about: aboutInfo || defaultState.about
+          prayerTimes: data.prayerTimes,
+          events: data.events,
+          transactions: data.transactions || [],
+          donationInfo: data.donationInfo || defaultDonationInfo,
+          contactInfo: data.contactInfo || defaultContactInfo,
+          about: data.about || defaultState.about
         }));
       } catch (error: any) {
         if (!isBackground) {
@@ -173,7 +166,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const intervalId = setInterval(() => {
       fetchData(true);
-    }, 5000);
+    }, 30000); // 30 seconds polling
 
 
     return () => clearInterval(intervalId);

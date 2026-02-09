@@ -158,7 +158,7 @@ npm run dev
 - **Password**: `admin123`
 
 ## ✨ Development Approach
-Proyek ini dibangun dengan pendekatan **AI-First Development** menggunakan **Google Antigravity**. Dokumentasi ini diperbarui secara berkala untuk mencerminkan perkembangan fitur terbaru.
+Proyek ini dibangun dengan pendekatan **AI-First Development** menggunakan **Google Antigravity**. Dokumentasi ini diperbarui secara berkala (Current: v1.0.1) untuk mencerminkan perkembangan fitur terbaru.
 
 ---
 

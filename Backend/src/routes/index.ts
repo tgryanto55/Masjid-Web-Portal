@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { getPublicData } from '../controllers/PublicController';
 import { getPrayerTimes, updatePrayerTime } from '../controllers/PrayerTimeController';
 import { getEvents, createEvent, updateEvent, deleteEvent } from '../controllers/EventController';
 import { getTransactions, createTransaction, deleteTransaction } from '../controllers/FinanceController';
@@ -10,6 +11,8 @@ import { verifyToken } from '../middleware/auth';
 import { upload } from '../middleware/multer';
 
 const router = Router();
+
+router.get('/public-data', getPublicData);
 
 
 router.get('/prayer-times', getPrayerTimes);

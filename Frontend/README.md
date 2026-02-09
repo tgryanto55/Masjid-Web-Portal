@@ -6,6 +6,10 @@ Dokumentasi lengkap untuk sisi Frontend aplikasi Masjid Web Portal. Aplikasi ini
 
 - **Core**: React 19 (Versi terbaru dengan peningkatan performa rendering)
 - **Build Tool**: Vite (Lightning fast HMR & Build)
+### [v1.0.2] Highlights
+- **Optimized Polling**: Pengambilan data otomatis setiap 30 detik menggunakan `publicService.getData()` yang mengambil seluruh data dalam satu batch permintaan API.
+- **Floating Glassmorphism UI**: Navbar modern yang tetap melayang rapi di atas konten.
+- **Immersive Layout**: Hero section yang memenuhi layar secara visual seimbang.
 - **Language**: TypeScript (Type safety & Developer experience)
 - **Styling**: Tailwind CSS 4 (Utility-first CSS framework)
 - **Routing**: React Router 7 (Manajemen navigasi client-side)

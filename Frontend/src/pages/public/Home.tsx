@@ -179,7 +179,7 @@ const Home = () => {
   return (
     <div className="space-y-6 pb-8 overflow-hidden bg-white">
 
-      <section className="relative lg:h-[calc(100vh-80px)] min-h-[600px] flex items-center py-8 lg:py-0 overflow-hidden bg-emerald-50/40">
+      <section className="relative lg:h-screen min-h-[650px] flex items-center pt-44 pb-32 overflow-hidden bg-emerald-50/40">
 
         <div
           className="absolute inset-0 opacity-10 pointer-events-none"
@@ -195,7 +195,7 @@ const Home = () => {
         <div className="absolute top-20 right-20 w-128 h-128 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-amber-100/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             <div className="reveal-up space-y-6">
@@ -221,26 +221,6 @@ const Home = () => {
               </div>
 
 
-              <div className="pt-8 border-t border-gray-200 grid grid-cols-2 gap-8 max-w-md">
-                <div className="flex items-center gap-3">
-                  <div className="bg-amber-100 text-amber-700 p-2 rounded-lg">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Lokasi</p>
-                    <p className="text-sm font-bold text-gray-800">Kota Sejahtera</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="bg-emerald-100 text-emerald-700 p-2 rounded-lg">
-                    <Clock size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Akses</p>
-                    <p className="text-sm font-bold text-gray-800">24 Jam / Hari</p>
-                  </div>
-                </div>
-              </div>
             </div>
 
 
@@ -312,10 +292,13 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        {/* Smooth Blend Gradient at Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-b from-transparent to-white z-20 pointer-events-none"></div>
       </section>
 
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
           <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 reveal-up stagger-1 hover:shadow-xl transition-all duration-500 group flex flex-col h-full">
@@ -404,7 +387,7 @@ const Home = () => {
 
 
       <section className="bg-slate-100/50 py-12 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 reveal-up">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Transparansi Keuangan</h2>
             <div className="w-20 h-1.5 bg-emerald-600 mx-auto rounded-full mb-6"></div>

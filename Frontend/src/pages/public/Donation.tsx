@@ -32,15 +32,18 @@ const Donation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20">
+    <div className="min-h-screen bg-slate-50 pb-12 relative overflow-hidden">
 
 
-      <div className="relative bg-emerald-50 py-14 px-4 mb-12 overflow-hidden border-b border-emerald-100">
+      <div className="relative bg-emerald-50 pt-36 pb-20 px-4 mb-12 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-100/40 rounded-full -mr-48 -mt-48 blur-3xl opacity-50"></div>
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-emerald-200/20 rounded-full -ml-32 -mt-32 blur-2xl opacity-30"></div>
 
+        {/* Smooth Blend Gradient at Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-b from-transparent to-slate-50 z-20 pointer-events-none"></div>
+
         <div
-          className={`max-w-7xl mx-auto text-center relative z-10 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          className={`max-w-6xl mx-auto text-center relative z-10 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
         >
           <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight text-gray-900">
@@ -96,8 +99,8 @@ const Donation = () => {
                   <button
                     onClick={() => copyToClipboard(donationInfo.accountNumber)}
                     className={`mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-black transition-all active:scale-95 ${copied
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-900/20'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-900/20'
                       }`}
                   >
                     {copied ? <CheckCircle size={16} /> : <Copy size={16} />}

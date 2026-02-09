@@ -127,4 +127,11 @@ export const aboutService = {
   }
 };
 
+export const publicService = {
+  getData: async () => {
+    const response = await api.get('/public-data');
+    return response.data;
+  }
+};
+
 export default api;
